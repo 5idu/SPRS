@@ -75,6 +75,7 @@ class head extends React.Component {
 					<AppBar
 						iconElementLeft={<IconButton><NavigationMenu /></IconButton>}
 						onLeftIconButtonTouchTap={this.handleToggle}
+						showMenuIconButton={this.state.title=='Login' ? false : true}
 						title={this.state.title}
 						titleStyle={{textAlign: 'center'}}
 					/>
@@ -87,7 +88,7 @@ class head extends React.Component {
 					      <Menu>
 					      	<div style={loginStyle}>
 						        <MenuItem onTouchTap={this.login} primaryText="登录" leftIcon={<SocialPersonOutline />} />					        
-						    </div>
+						      </div>
 					        <div style={logoutStyle}>
 						        <MenuItem primaryText={user.loginname} leftIcon={<ActionAccountCircle />} />					    
 						        <MenuItem onTouchTap={this.logout} primaryText='退出' leftIcon={<SubdirectoryArrowLeft />} />						        

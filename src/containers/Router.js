@@ -9,9 +9,9 @@ import Login from './Login'
 const routes = [
     {
         path: '/',
-        component: Login,
+        component: Home,
         exact: true,
-        name: 'Login'
+        name: 'Home'
     }, {
         path: '/home',
         component: Home,

@@ -34,14 +34,10 @@ export default class LoginForm extends React.Component {
 	}
 
 	goBack = () => {
-		const user = this.props.user;
+		let user = this.props.user;
 		if(user && Object.keys(user).length > 0){
-			try {
-				let uri = this.props.location.state.fromUri;
-				this.props.history.push(uri);	
-			} catch (error) {
-				this.props.history.push('/home');	
-			}
+			let uri = this.props.location.state.fromUri;
+			this.props.history.push(uri);
 		}
 	}
 	componentWillMount(){

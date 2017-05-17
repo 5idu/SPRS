@@ -8,7 +8,6 @@ import RefreshIndicator from 'material-ui/RefreshIndicator';
 export default class LoginForm extends React.Component {
 	constructor(props) {
 		super(props);
-		/*需要给个默认用户吗？*/
 		this.state = {
             UserName:'',
             PassWord:''
@@ -33,22 +32,23 @@ export default class LoginForm extends React.Component {
 		this.props.login(UserName,PassWord);
 	}
 
-	goBack = () => {
+	goTo = () => {
 		let user = this.props.user;
 		if(user && Object.keys(user).length > 0){
-			let uri = this.props.location.state.fromUri;
-			console.log(uri);
-			this.props.history.push(uri);
+			this.props.history.push('/home');
 		}
 	}
 	componentWillMount(){
-		this.goBack();
+		this.goTo();
 	}
 
 	shouldComponentUpdate(nextProps){
-		this.goBack();
-		return true;
-	}
+    	let user = nextProps.user; //注意：user使用this.props.user时取不到数据
+    	if(user && Object.keys(user).length > 0){
+			this.props.history.push('/home')
+    	}
+    	return true
+  	}
 
 	render(){
 		const errorText = this.props.status.error;

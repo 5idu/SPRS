@@ -19,27 +19,12 @@ export default class HomeBody extends React.Component {
     } 
   }
 
-/*
-  login = () => {
-    let user = this.props.user
-    if(!user || Object.keys(user).length <=0){
-      let uri = this.props.location.pathname
-      this.props.history.push('/login',{fromUri:uri})
-      return false
-    }else{
-      return true
-    }
-  }
-*/
   componentWillMount(){
-    //this.login();
-    
     //根据用户名查询数据
     // this.props.getDefaultData();
   }
 
   render(){
-
     return (
       <MuiThemeProvider>
         <div>

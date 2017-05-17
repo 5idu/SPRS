@@ -25,5 +25,5 @@ export default function configureStore() {
 		});
 	}
 
-  	return store;
+  return store;
 };

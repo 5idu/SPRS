@@ -11,20 +11,21 @@ const getUser = (UserName,PassWord) => {
 			error: '',
 			doing: true
 		}))
+
 		if(UserName.length <= 0){
-			dispatch(doneStatus({
+		  return dispatch(doneStatus({
 				error:"UserName can't be empty",
 				doing : false
-			}))
-			return;
+			}));
 		}
-        if(PassWord.length <= 0){
-			dispatch(doneStatus({
+		
+		if(PassWord.length <= 0){
+			return dispatch(doneStatus({
 				error:"PassWord can't be empty",
 				doing : false
-			}))
-			return;
+			}));
 		}
+
 		let url = "http://jisapp.jhtgroup.com/AppServer/Home/Login?UserName="+ UserName +"&PassWord="+ PassWord;
 
 		return fetch(url, {

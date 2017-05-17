@@ -37,6 +37,7 @@ export default class LoginForm extends React.Component {
 		let user = this.props.user;
 		if(user && Object.keys(user).length > 0){
 			let uri = this.props.location.state.fromUri;
+			console.log(uri);
 			this.props.history.push(uri);
 		}
 	}

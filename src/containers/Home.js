@@ -5,6 +5,10 @@ import Header from '../components/Header';
 import HomeBody from '../components/HomeBody';
 import { saveUser,todoStatus,doingStatus,doneStatus } from '../store/actions'
 
+const defaultData = () => {
+	return (dispatch,getState) => {}
+}
+
 const mapStateToProps = (state) => {
   return {
     user: state.user,
@@ -13,7 +17,11 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {}
+  return {
+    getDefaultData:() => {
+    	dispatch(defaultData())
+    }
+  }
 }
 
 const MainBody = connect(
@@ -27,7 +35,7 @@ export default class Home extends React.Component {
 		  <div>
 		  	<Header {...this.props}/>
 		  	<div className="main">
-		  		<MainBody {...this.props} />
+		  		<MainBody {...this.props}/>
 		  	</div>
 		  </div>
 		)	

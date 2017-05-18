@@ -2,26 +2,17 @@ import React from 'react';
 import 'whatwg-fetch';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
-import HomeBody from '../components/HomeBody';
+import PoListBody from '../components/PoListBody';
 import { todoStatus,doingStatus,doneStatus } from '../store/actions'
 
-const orderData = (UserID) => {
-	return dispatch => {	
+const poListData = (UserID,State) => {
+    return dispatch => {	
 		dispatch(todoStatus({
 			doing: true,
-			data:{
-				PoSum: "0",
-      	SoSum: "0",
-      	PcsSum: "0",
-     		State1: "0",
-      	State2: "0",
-      	State3: "0",
-      	State4: "0",
-      	State5: "0"
-			}
+            poListdata: []
 		}))
 
-		let url = "http://jisapp.jhtgroup.com/AppServer/Home/Main?UserID="+ UserID;
+		let url = "http://jisapp.jhtgroup.com/AppServer/Home/SortList?UserID="+ UserID +"&State="+ State;
 
 		return fetch(url, {
 		  method: 'GET',
@@ -31,23 +22,21 @@ const orderData = (UserID) => {
 		}).then(response => {
 			return response.json()
 		}).then(data => {
-			dispatch(doneStatus({
-				doing: false,
-				data: data
-			}))
+			if(data == null||data == ''){
+                dispatch(doneStatus({
+				    doing: false,
+				    poListdata: [] 
+			    }))
+            }else{
+                dispatch(doneStatus({
+				    doing: false,
+				    poListdata: data 
+			    }))
+            }
 		}).catch((ex) => {
 			dispatch(doneStatus({
 				doing: false,
-				data:{
-					PoSum: "0",
-      		SoSum: "0",
-      		PcsSum: "0",
-     			State1: "0",
-      		State2: "0",
-      		State3: "0",
-      		State4: "0",
-      		State5: "0"
-				}
+                poListdata: [] 
 			}))
 		})
 	}
@@ -62,8 +51,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getOrderData:(UserID) => {
-    	dispatch(orderData(UserID))
+    getPoListData:(UserID,State) => {
+    	dispatch(poListData(UserID,State))
     }
   }
 }
@@ -71,9 +60,9 @@ const mapDispatchToProps = (dispatch) => {
 const MainBody = connect(
   mapStateToProps,
   mapDispatchToProps
-)(HomeBody);
+)(PoListBody);
 
-export default class Home extends React.Component {
+export default class PoList extends React.Component {
 	render(){
 		return (
 		  <div>

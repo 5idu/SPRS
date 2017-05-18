@@ -4,7 +4,8 @@ import Home from './Home';
 import Query from './Query';
 import Historys from './History';
 import About from './About';
-import Login from './Login'
+import Login from './Login';
+import PoList from './PoList';
 
 const routes = [
     {
@@ -15,7 +16,12 @@ const routes = [
     }, {
         path: '/home',
         component: Home,
+        exact: true,
         name: 'Home'
+    },{
+        path: '/home/:state',
+        component: PoList,
+        name: 'PoList'
     }, {
         path: '/query',
         component: Query,

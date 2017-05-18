@@ -6,6 +6,8 @@ import Historys from './History';
 import About from './About';
 import Login from './Login';
 import PoList from './PoList';
+import PoDetail from './PoDetail';
+import PoPack from './PoPack';
 
 const routes = [
     {
@@ -21,7 +23,18 @@ const routes = [
     },{
         path: '/home/:state',
         component: PoList,
+        exact: true,
         name: 'PoList'
+    },{
+        path: '/home/:state/:soNum',
+        component: PoDetail,
+        exact: true,
+        name: 'PoDetail'
+    },{
+        path: '/home/:state/:soNum/:itemsNum',
+        component: PoPack,
+        exact: true,
+        name: 'PoPack'
     }, {
         path: '/query',
         component: Query,

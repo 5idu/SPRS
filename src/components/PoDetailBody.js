@@ -13,37 +13,38 @@ export default class PoListBody extends React.Component {
     //发送请求数据
     let UserID = this.props.user.loginname;
     let State = this.props.location.pathname.split('/')[2];
-    this.props.getPoListData(UserID,State);
+    let SoNum = this.props.location.pathname.split('/')[3];
+    this.props.getPoDetailData(UserID,SoNum,State);
   }
-
-  // componentDidMount() {
-  //   //更新数据
-  //   let status = this.props.status;
-  //   if(status.error===''){
-  //       this.setState({
-  //           data: status.data
-  //       });
-  //   }
-  // }
-
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   let shouldUpdate = false
-  //   if (this.props.status.poListdata !== nextProps.status.poListdata) {
-  //     shouldUpdate = true
-  //   }   
-  //   return shouldUpdate
-  // }
-
-  // handleCellClick (rowNumber, columnNumber, event) {
-  //    console.log(event.target.innerHTML);
-  // }
 
   handleRowSelection(rows) {
     let State = this.props.location.pathname.split('/')[2];
     for (let i = 0; i < rows.length; i++) {
-        let obj=this.props.status.poListdata[rows[i]]
-        this.props.history.push(`/home/${State}/${obj.SO}`);
+        let obj=this.props.status.poDetaildata[rows[i]]
+        this.props.history.push(`/home/${State}/${obj.SONum}/${obj.ItemsNum}`);
     }
+  }
+
+  handSubtitle(){
+      let State = this.props.location.pathname.split('/')[2];
+      if(State==='st1'){
+          return 'On Way'
+      }
+      if(State==='st2'){
+          return 'In Transit at Port'
+      }
+      if(State==='st3'){
+          return 'Ready for Departure'
+      }
+      if(State==='st4'){
+          return 'Packed but no Shipping'
+      }
+      if(State==='st5'){
+          return 'Preparation'
+      }
+      if(State==='st6'){
+          return 'All Order'
+      }
   }
 
   render() {
@@ -76,18 +77,21 @@ export default class PoListBody extends React.Component {
     <MuiThemeProvider>
       <div> 
       <div style={doing ? style.displayNone:style.displayBlock} >
+          <div style={{width:'100%',textAlign:'center'}}>
+              {this.handSubtitle()}
+          </div>
       <Table onRowSelection={(rows) => this.handleRowSelection(rows)}>
         <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
           <TableRow>
             <TableHeaderColumn>PO</TableHeaderColumn>
-            <TableHeaderColumn>ETD</TableHeaderColumn>
+            <TableHeaderColumn>Items</TableHeaderColumn>
           </TableRow>
         </TableHeader>
         <TableBody displayRowCheckbox={false}>
-          {this.props.status.poListdata.map((item,key) =>    
+          {this.props.status.poDetaildata.map((item,key) =>    
             <TableRow key={key} value={item}>              
-              <TableRowColumn>{item.SO}</TableRowColumn>
-              <TableRowColumn>{item.EDATU}</TableRowColumn>          
+              <TableRowColumn>{item.SONum}</TableRowColumn>
+              <TableRowColumn>{item.ItemsNum}</TableRowColumn>          
             </TableRow>
             )
           }   

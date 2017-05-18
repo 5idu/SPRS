@@ -1,12 +1,10 @@
 import React from 'react'
-import {Redirect} from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
 import Chip from 'material-ui/Chip';
-import {blue300, indigo900} from 'material-ui/styles/colors';
 
 export default class HomeBody extends React.Component {
   constructor(props) {
@@ -154,6 +152,7 @@ export default class HomeBody extends React.Component {
               status={loadStatus}
               style={style.refresh}/>
           </div>
+          <div style={doing ? style.displayNone:style.displayBlock} >
           <List>
             <Subheader style={{textAlign: 'center'}}>Order Summary</Subheader>
             <ListItem primaryText="PO" onClick={()=>this.getStateTable('po')} rightIcon={icon.po}/>
@@ -167,6 +166,7 @@ export default class HomeBody extends React.Component {
             <ListItem primaryText="Packed but no Shipping Space Confirmation" onClick={()=>this.getStateTable('packed')} rightIcon={icon.packed}/>
             <ListItem primaryText="Preparation" onClick={()=>this.getStateTable('preparation')} rightIcon={icon.preparation}/>
           </List>
+          </div>
         </div>
       </MuiThemeProvider>
     )

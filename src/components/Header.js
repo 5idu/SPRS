@@ -18,6 +18,7 @@ import SocialPersonOutline from 'material-ui/svg-icons/social/person-outline';
 import ActionSearch from 'material-ui/svg-icons/action/search';
 import ActionHistory from 'material-ui/svg-icons/action/history';
 import Divider from 'material-ui/Divider';
+import EditorInsertChart from 'material-ui/svg-icons/editor/insert-chart';
 
 class head extends React.Component {
 
@@ -73,11 +74,13 @@ class head extends React.Component {
 			<MuiThemeProvider>
 				<div>
 					<AppBar
-						iconElementLeft={<IconButton><NavigationMenu /></IconButton>}
+						iconElementLeft={<IconButton><NavigationMenu/></IconButton>}
 						onLeftIconButtonTouchTap={this.handleToggle}
 						showMenuIconButton={this.state.title=='Login' ? false : true}
 						title={this.state.title}
 						titleStyle={{textAlign: 'center'}}
+						iconElementRight={<IconButton><EditorInsertChart/></IconButton>}
+						style={{position: 'fixed'}}
 					/>
 					<Drawer
 			          docked={false}

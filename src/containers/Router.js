@@ -63,6 +63,31 @@ const routes = [
         exact: true,
         name: 'PoPackTable'
     },{
+        path: '/home/st1/:soNum/:itemsNum/:packListNo',
+        component: PoPackProgress,
+        exact: true,
+        name: 'PoPackProgress'
+    },{
+        path: '/home/st2/:soNum/:itemsNum/:packListNo',
+        component: PoPackProgress,
+        exact: true,
+        name: 'PoPackProgress'
+    },{
+        path: '/home/st3/:soNum/:itemsNum/:packListNo',
+        component: PoPackProgress,
+        exact: true,
+        name: 'PoPackProgress'
+    },{
+        path: '/home/st4/:soNum/:itemsNum/:packListNo',
+        component: PoPackProgress,
+        exact: true,
+        name: 'PoPackProgress'
+    },{
+        path: '/home/st6/:soNum/:itemsNum/Packaging',
+        component: PoPackProgress,
+        exact: true,
+        name: 'PoPackProgress'
+    },{
         path: '/query',
         component: Query,
         name: 'Query'

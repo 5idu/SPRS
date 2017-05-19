@@ -15,14 +15,24 @@ export default class PoPackProgressBody extends React.Component {
     let State = this.props.location.pathname.split('/')[2];
     let SONum = this.props.location.pathname.split('/')[3];
     let ItemsNum = this.props.location.pathname.split('/')[4]
+    let packListNo = this.props.location.pathname.split('/')[5]
     if(this.props.location.pathname.split('/')[1]==='home' && this.props.location.pathname.split('/')[2]==='st5'){
         this.props.getPoPackProgressData(SONum,ItemsNum,State,0);
+    }else if(this.props.location.pathname.split('/')[1]==='home' && this.props.location.pathname.split('/')[2]==='st6'){
+        this.props.getPoPackProgressData(SONum,ItemsNum,5,'Packaging');
+    }else{
+        this.props.getPoPackProgressData(SONum,ItemsNum,State,packListNo);
     }
   }
 
 
   render() {
     const poPackProgressdata = this.props.status.poPackProgressdata;
+    const transport = poPackProgressdata.transport.map((item,key)=>{
+        item.Title=item.Title.replace('</br><p style=\"color:blue\">','')
+        item.Title=item.Title.replace('</p>','')
+        return item
+    })
   
     //加载框开始
     const doing = this.props.status.doing;
@@ -94,7 +104,7 @@ export default class PoPackProgressBody extends React.Component {
           </Card>
           <div style={{maxWidth: 400, maxHeight: 400, margin: 'auto'}}>
         <Stepper orientation="vertical">
-            {poPackProgressdata.transport.map((item,key) =>
+            {transport.map((item,key) =>
                 <Step key={key}>
                     <StepLabel active={true} icon={key + 1}>{item.Title}</StepLabel>
                     <StepContent active={true}>

@@ -38,6 +38,16 @@ export default class PoPackTableBody extends React.Component {
       }
   }
 
+  handleRowSelection(rows) {
+    let State = this.props.location.pathname.split('/')[2];
+    let SONum = this.props.location.pathname.split('/')[3];
+    let ItemsNum = this.props.location.pathname.split('/')[4]
+    for (let i = 0; i < rows.length; i++) {
+        let obj=this.props.status.poPackTabledata[rows[i]]
+        this.props.history.push(`/home/${State}/${SONum}/${ItemsNum}/${obj.PackListNo}`);
+    }
+  }
+
   render() {
   
     //加载框开始
@@ -85,7 +95,7 @@ export default class PoPackTableBody extends React.Component {
                  </TableRow>
               </TableBody>
          </Table>
-         <Table>
+         <Table onRowSelection={(rows) => this.handleRowSelection(rows)}>
             <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                 <TableRow>
                     <TableHeaderColumn>PACKED-UP NO</TableHeaderColumn>

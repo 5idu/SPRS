@@ -52,6 +52,12 @@ export default class PoPackListBody extends React.Component {
       }
   }
 
+  getPoPackProgress() {
+      let SoNum = this.props.location.pathname.split('/')[3];
+      let ItemsNum = this.props.location.pathname.split('/')[4];
+      this.props.history.push(`/home/st6/${SoNum}/${ItemsNum}/Packaging`);
+  }
+
   render() {
   
     //加载框开始
@@ -92,6 +98,7 @@ export default class PoPackListBody extends React.Component {
                 <ListItem
                   key={1}
                   primaryText={this.handleListItemText('PackListNo')}
+                  onClick={()=>this.getPoPackProgress()}
                   rightIcon={
                       <Chip 
                         style={{width: 'auto',height: 'auto',backgroundColor: '#DC5446'}} 

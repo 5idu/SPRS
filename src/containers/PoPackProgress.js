@@ -9,7 +9,9 @@ const poPackProgressData = (SONum,ItemsNum,State,packListNo) => {
     return dispatch => {	
 		dispatch(todoStatus({
 			doing: true,
-      poPackProgressdata: {}
+      poPackProgressdata: {
+				'transport':[]
+			}
 		}))
   
     let url = "http://jisapp.jhtgroup.com/AppServer/Home/getDatailForSoItemsStaPack?SONum="+ SONum +"&ItemsNum="+ ItemsNum +"&State="+ State +"&packListNo="+ packListNo;
@@ -30,7 +32,9 @@ const poPackProgressData = (SONum,ItemsNum,State,packListNo) => {
 		}).catch((ex) => {
 			dispatch(doneStatus({
 				doing: false,
-        poPackProgressdata: {} 
+        poPackProgressdata: {
+					'transport':[]
+				}
 			}))
 		})
 	}

@@ -3,32 +3,17 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 
-export default class PoListBody extends React.Component {
+export default class PoPackTableBody extends React.Component {
     constructor(props) {
     super(props);
   }
 
-
   componentWillMount() {
     //发送请求数据
-    let UserID = this.props.user.loginname;
     let State = this.props.location.pathname.split('/')[2];
-    let SoNum = this.props.location.pathname.split('/')[3];
-    this.props.getPoDetailData(UserID,SoNum,State);
-  }
-
-  handleRowSelection(rows) {
-    let State = this.props.location.pathname.split('/')[2];
-    for (let i = 0; i < rows.length; i++) {
-        let obj=this.props.status.poDetaildata[rows[i]]
-        if(State==='st6'){
-          this.props.history.push(`/home/st6/${obj.SONum}/${obj.ItemsNum}`);
-        }else if(State==='st5'){
-          this.props.history.push(`/home/st5/${obj.SONum}/${obj.ItemsNum}`);
-        }else{
-          this.props.history.push(`/home/${State}/${obj.SONum}/${obj.ItemsNum}`);
-        }
-    }
+    let SONum = this.props.location.pathname.split('/')[3];
+    let ItemsNum = this.props.location.pathname.split('/')[4];
+    this.props.getPoPackTableData(SONum,ItemsNum,State);
   }
 
   handSubtitle(){
@@ -86,23 +71,35 @@ export default class PoListBody extends React.Component {
           <div style={{width:'100%',textAlign:'center'}}>
               {this.handSubtitle()}
           </div>
-      <Table onRowSelection={(rows) => this.handleRowSelection(rows)}>
-        <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
-          <TableRow>
-            <TableHeaderColumn>PO</TableHeaderColumn>
-            <TableHeaderColumn>Items</TableHeaderColumn>
-          </TableRow>
-        </TableHeader>
-        <TableBody displayRowCheckbox={false}>
-          {this.props.status.poDetaildata.map((item,key) =>    
-            <TableRow key={key} value={item}>              
-              <TableRowColumn>{item.SONum}</TableRowColumn>
-              <TableRowColumn>{item.ItemsNum}</TableRowColumn>          
-            </TableRow>
-            )
-          }   
-        </TableBody>
-      </Table>
+          <Table>
+              <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+                  <TableRow>
+                      <TableHeaderColumn>PO</TableHeaderColumn>
+                      <TableHeaderColumn>Item</TableHeaderColumn>
+                  </TableRow>
+              </TableHeader>
+              <TableBody displayRowCheckbox={false}>
+                  <TableRow key={1}>              
+                      <TableRowColumn>{this.props.location.pathname.split('/')[3]}</TableRowColumn>
+                      <TableRowColumn>{this.props.location.pathname.split('/')[4]}</TableRowColumn>          
+                 </TableRow>
+              </TableBody>
+         </Table>
+         <Table>
+            <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+                <TableRow>
+                    <TableHeaderColumn>PACKED-UP NO</TableHeaderColumn>
+                    <TableHeaderColumn>PCS</TableHeaderColumn>
+                </TableRow>
+            </TableHeader>
+            <TableBody displayRowCheckbox={false}>
+                {this.props.status.poPackTabledata.map((item,key) =>    
+                    <TableRow key={key} value={item}>              
+                        <TableRowColumn>{item.PackListNo}</TableRowColumn>
+                        <TableRowColumn>{item.T_QTY}</TableRowColumn>          
+                    </TableRow>)}   
+            </TableBody>
+        </Table>
       </div>
       <div style={style.container}>
             <RefreshIndicator

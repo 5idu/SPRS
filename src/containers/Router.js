@@ -7,7 +7,9 @@ import About from './About';
 import Login from './Login';
 import PoList from './PoList';
 import PoDetail from './PoDetail';
-import PoPack from './PoPack';
+import PoPackList from './PoPackList';
+import PoPackTable from './PoPackTable';
+import PoPackProgress from './PoPackProgress';
 
 const routes = [
     {
@@ -31,11 +33,36 @@ const routes = [
         exact: true,
         name: 'PoDetail'
     },{
-        path: '/home/:state/:soNum/:itemsNum',
-        component: PoPack,
+        path: '/home/st6/:soNum/:itemsNum',
+        component: PoPackList,
         exact: true,
-        name: 'PoPack'
+        name: 'PoPackList'
+    },{
+        path: '/home/st5/:soNum/:itemsNum',
+        component: PoPackProgress,
+        exact: true,
+        name: 'PoPackProgress'
+    },{
+        path: '/home/st1/:soNum/:itemsNum',
+        component: PoPackTable,
+        exact: true,
+        name: 'PoPackTable'
+    },{
+        path: '/home/st2/:soNum/:itemsNum',
+        component: PoPackTable,
+        exact: true,
+        name: 'PoPackTable'
     }, {
+        path: '/home/st3/:soNum/:itemsNum',
+        component: PoPackTable,
+        exact: true,
+        name: 'PoPackTable'
+    },{
+        path: '/home/st4/:soNum/:itemsNum',
+        component: PoPackTable,
+        exact: true,
+        name: 'PoPackTable'
+    },{
         path: '/query',
         component: Query,
         name: 'Query'

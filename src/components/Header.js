@@ -51,6 +51,10 @@ class head extends React.Component {
 		this.props.history.push('/login',{fromUri:uri});
 	}
 
+	showChart=()=> {
+		 this.props.history.push('/chart');
+	}
+
 	render(){
 
 		const user = this.props.user
@@ -79,8 +83,9 @@ class head extends React.Component {
 						showMenuIconButton={this.state.title=='Login' ? false : true}
 						title={this.state.title}
 						titleStyle={{textAlign: 'center'}}
-						iconElementRight={<IconButton><EditorInsertChart/></IconButton>}
+						iconElementRight={this.state.title=='Home' ? <IconButton><EditorInsertChart/></IconButton> : <div></div>}
 						style={{position: 'fixed'}}
+						onRightIconButtonTouchTap={this.showChart}
 					/>
 					<Drawer
 			          docked={false}

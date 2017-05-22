@@ -10,6 +10,7 @@ import PoDetail from './PoDetail';
 import PoPackList from './PoPackList';
 import PoPackTable from './PoPackTable';
 import PoPackProgress from './PoPackProgress';
+import Chart from './Chart';
 
 const routes = [
     {
@@ -87,6 +88,11 @@ const routes = [
         component: PoPackProgress,
         exact: true,
         name: 'PoPackProgress'
+    },{
+        path: '/chart',
+        component: Chart,
+        exact: true,
+        name: 'Chart'
     },{
         path: '/query',
         component: Query,

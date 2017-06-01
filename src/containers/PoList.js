@@ -9,7 +9,7 @@ const poListData = (UserID,State) => {
     return dispatch => {	
 		dispatch(todoStatus({
 			doing: true,
-            poListdata: []
+      poListdata: []
 		}))
 
 		let url = "http://jisapp.jhtgroup.com/AppServer/Home/SortList?UserID="+ UserID +"&State="+ State;
@@ -23,20 +23,20 @@ const poListData = (UserID,State) => {
 			return response.json()
 		}).then(data => {
 			if(data == null||data == ''){
-                dispatch(doneStatus({
+          dispatch(doneStatus({
 				    doing: false,
 				    poListdata: [] 
 			    }))
-            }else{
-                dispatch(doneStatus({
+      }else{
+          dispatch(doneStatus({
 				    doing: false,
 				    poListdata: data 
 			    }))
-            }
+    	}
 		}).catch((ex) => {
 			dispatch(doneStatus({
 				doing: false,
-                poListdata: [] 
+        poListdata: [] 
 			}))
 		})
 	}

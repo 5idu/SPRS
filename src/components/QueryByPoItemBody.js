@@ -63,19 +63,13 @@ export default class QueryByPoItemBody extends React.Component {
                         hintText="Entry PO"
                         floatingLabelText="PO"
                         fullWidth={true}
-                        ref="textFieldPo"
-                        inputStyle={{
-                        textAlign: 'center'
-                    }}/>
+                        ref="textFieldPo"/>
                     <br/>
                     <TextField
                         hintText="Entry Item"
                         floatingLabelText="Item"
                         fullWidth={true}
-                        ref="textFieldItem"
-                        inputStyle={{
-                        textAlign: 'center'
-                    }}/>
+                        ref="textFieldItem"/>
                     <br/>
                     <div style={style.div}>
                         <RaisedButton

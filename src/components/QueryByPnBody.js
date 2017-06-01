@@ -54,10 +54,7 @@ export default class QueryByPnBody extends React.Component {
                         hintText="Entry PN#"
                         floatingLabelText="PN#"
                         fullWidth={true}
-                        ref="textField"
-                        inputStyle={{
-                        textAlign: 'center'
-                    }}/>
+                        ref="textField"/>
                     <br/>
                     <div style={style.div}>
                         <RaisedButton

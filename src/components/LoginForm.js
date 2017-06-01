@@ -85,7 +85,7 @@ export default class LoginForm extends React.Component {
 				      hintStyle={{"width":"100%"}}
 				      fullWidth={true}
 					  inputStyle={{textAlign:'center'}}
-				      style={{textAlign:'center',marginBottom:30}}
+				      style={{marginBottom:30}}
 				      onChange={this.handleUserNameChange}
 				    />
                     <TextField
@@ -94,7 +94,7 @@ export default class LoginForm extends React.Component {
 				      hintStyle={{"width":"100%"}}
 				      fullWidth={true}
 					  inputStyle={{textAlign:'center'}}
-				      style={{textAlign:'center',marginBottom:30}}
+				      style={{marginBottom:30}}
 				      onChange={this.handlePassWordChange}
 				      errorText={errorText}
 				    />

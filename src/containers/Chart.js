@@ -141,7 +141,7 @@ const MainBody = connect(
   mapDispatchToProps
 )(ChartBody);
 
-export default class Home extends React.Component {
+export default class Chart extends React.Component {
 	render(){
 		return (
 		  <div>

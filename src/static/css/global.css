@@ -36,3 +36,7 @@ div{
     -webkit-transform: rotate(-90deg);
     transform: rotate(-90deg);
 }
+
+input {
+	text-align: center
+}

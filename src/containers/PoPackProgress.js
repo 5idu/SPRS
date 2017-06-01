@@ -60,7 +60,7 @@ const MainBody = connect(
   mapDispatchToProps
 )(PoPackProgressBody);
 
-export default class PoList extends React.Component {
+export default class PoPackProgress extends React.Component {
 	render(){
 		return (
 		  <div>

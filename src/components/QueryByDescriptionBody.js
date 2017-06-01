@@ -54,10 +54,7 @@ export default class QueryByDescriptionBody extends React.Component {
                         hintText="Entry Description"
                         floatingLabelText="Description"
                         fullWidth={true}
-                        ref="textField"
-                        inputStyle={{
-                        textAlign: 'center'
-                    }}/>
+                        ref="textField"/>
                     <br/>
                     <div style={style.div}>
                         <RaisedButton

@@ -52,10 +52,7 @@ export default class QueryByPoBody extends React.Component {
                         hintText="Entry PO"
                         floatingLabelText="PO"
                         fullWidth={true}
-                        ref="textField"
-                        inputStyle={{
-                        textAlign: 'center'
-                    }}/>
+                        ref="textField"/>
                     <br/>
                     <div style={style.div}>
                         <RaisedButton

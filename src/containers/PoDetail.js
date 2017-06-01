@@ -62,7 +62,7 @@ const MainBody = connect(
   mapDispatchToProps
 )(PoDetailBody);
 
-export default class PoList extends React.Component {
+export default class PoDetail extends React.Component {
 	render(){
 		return (
 		  <div>

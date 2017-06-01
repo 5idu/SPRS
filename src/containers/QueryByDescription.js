@@ -22,7 +22,7 @@ const MainBody = connect(
   mapDispatchToProps
 )(QueryByDescriptionBody);
 
-export default class PoList extends React.Component {
+export default class QueryByDescription extends React.Component {
 	render(){
 		return (
 		  <div>

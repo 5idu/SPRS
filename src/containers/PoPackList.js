@@ -55,7 +55,7 @@ const MainBody = connect(
   mapDispatchToProps
 )(PoPackListBody);
 
-export default class PoList extends React.Component {
+export default class PoPackList extends React.Component {
 	render(){
 		return (
 		  <div>

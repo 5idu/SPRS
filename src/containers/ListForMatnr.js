@@ -62,7 +62,7 @@ const MainBody = connect(
   mapDispatchToProps
 )(ListForMatnrBody);
 
-export default class PoList extends React.Component {
+export default class ListForMatnr extends React.Component {
 	render(){
 		return (
 		  <div>

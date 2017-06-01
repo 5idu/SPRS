@@ -62,7 +62,7 @@ const MainBody = connect(
   mapDispatchToProps
 )(ListForDescriptionBody);
 
-export default class PoList extends React.Component {
+export default class ListForDescription extends React.Component {
 	render(){
 		return (
 		  <div>

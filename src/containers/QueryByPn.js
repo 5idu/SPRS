@@ -2,7 +2,7 @@ import React from 'react';
 import 'whatwg-fetch';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
-import QueryBody from '../components/QueryBody';
+import QueryByPnBody from '../components/QueryByPnBody';
 import { todoStatus,doingStatus,doneStatus } from '../store/actions'
 
 
@@ -14,13 +14,13 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-	return {}
+    return {}
 }
 
 const MainBody = connect(
   mapStateToProps,
   mapDispatchToProps
-)(QueryBody);
+)(QueryByPnBody);
 
 export default class PoList extends React.Component {
 	render(){

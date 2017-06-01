@@ -81,15 +81,19 @@ export default class LoginForm extends React.Component {
 			  	<div>
 				  	<TextField
 				      hintText="UserName"
+					  floatingLabelText="UserName"
 				      hintStyle={{"width":"100%"}}
 				      fullWidth={true}
+					  inputStyle={{textAlign:'center'}}
 				      style={{textAlign:'center',marginBottom:30}}
 				      onChange={this.handleUserNameChange}
 				    />
                     <TextField
 				      hintText="PassWord"
+					  floatingLabelText="PassWord"
 				      hintStyle={{"width":"100%"}}
 				      fullWidth={true}
+					  inputStyle={{textAlign:'center'}}
 				      style={{textAlign:'center',marginBottom:30}}
 				      onChange={this.handlePassWordChange}
 				      errorText={errorText}

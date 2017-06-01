@@ -11,6 +11,12 @@ import PoPackList from './PoPackList';
 import PoPackTable from './PoPackTable';
 import PoPackProgress from './PoPackProgress';
 import Chart from './Chart';
+import QueryByPo from './QueryByPo';
+import QueryByPoItem from './QueryByPoItem';
+import QueryByPn from './QueryByPn';
+import QueryByDescription from './QueryByDescription';
+import ListForMatnr from './ListForMatnr';
+import ListForDescription from './ListForDescription';
 
 const routes = [
     {
@@ -96,8 +102,39 @@ const routes = [
     },{
         path: '/query',
         component: Query,
+        exact: true,
         name: 'Query'
-    }, {
+    },{
+        path: '/query/po',
+        component: QueryByPo,
+        exact: true,
+        name: 'Query by PO number'
+    },{
+        path: '/query/po&item',
+        component: QueryByPoItem,
+        exact: true,
+        name: 'Query by PO+Item number'
+    },{
+        path: '/query/pn',
+        component: QueryByPn,
+        exact: true,
+        name: 'Query by PN#'
+    },{
+        path: '/query/description',
+        component: QueryByDescription,
+        exact: true,
+        name: 'Query by Description'
+    },{
+        path: '/query/matnr/:pn',
+        component: ListForMatnr,
+        exact: true,
+        name: 'PO Content'
+    },{
+        path: '/query/desc/:desc',
+        component: ListForDescription,
+        exact: true,
+        name: 'Progress'
+    },{
         path: '/historys',
         component: Historys,
         name: 'Historys'

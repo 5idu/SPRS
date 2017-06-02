@@ -8,7 +8,6 @@ export default class PoListBody extends React.Component {
     super(props);
   }
 
-
   componentWillMount() {
     //发送请求数据
     let UserID = this.props.user.loginname;
@@ -47,7 +46,7 @@ export default class PoListBody extends React.Component {
   }
 
   render() {
-  
+
     //加载框开始
     const doing = this.props.status.doing;
 		let loadStatus = 'loading';

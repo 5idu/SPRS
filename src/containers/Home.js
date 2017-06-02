@@ -9,16 +9,7 @@ const orderData = (UserID) => {
 	return dispatch => {	
 		dispatch(todoStatus({
 			doing: true,
-			data:{
-				PoSum: "0",
-      	SoSum: "0",
-      	PcsSum: "0",
-     		State1: "0",
-      	State2: "0",
-      	State3: "0",
-      	State4: "0",
-      	State5: "0"
-			}
+			data:{}
 		}))
 
 		let url = "http://jisapp.jhtgroup.com/AppServer/Home/Main?UserID="+ UserID;
@@ -38,16 +29,7 @@ const orderData = (UserID) => {
 		}).catch((ex) => {
 			dispatch(doneStatus({
 				doing: false,
-				data:{
-					PoSum: "0",
-      		SoSum: "0",
-      		PcsSum: "0",
-     			State1: "0",
-      		State2: "0",
-      		State3: "0",
-      		State4: "0",
-      		State5: "0"
-				}
+				data:{}
 			}))
 		})
 	}

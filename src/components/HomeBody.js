@@ -12,28 +12,46 @@ export default class HomeBody extends React.Component {
   }
 
   getStateTable(args) {
-    if(args==='po'){
-      this.props.history.push('/home/st6');
+    if (args === 'po') {
+      this
+        .props
+        .history
+        .push('/home/st6');
       return;
     }
-    if(args==='onWay'){
-      this.props.history.push('/home/st1');
+    if (args === 'onWay') {
+      this
+        .props
+        .history
+        .push('/home/st1');
       return;
     }
-    if(args==='in'){
-      this.props.history.push('/home/st2');
+    if (args === 'in') {
+      this
+        .props
+        .history
+        .push('/home/st2');
       return;
     }
-    if(args==='ready'){
-      this.props.history.push('/home/st3');
+    if (args === 'ready') {
+      this
+        .props
+        .history
+        .push('/home/st3');
       return;
     }
-    if(args==='packed'){
-      this.props.history.push('/home/st4');
+    if (args === 'packed') {
+      this
+        .props
+        .history
+        .push('/home/st4');
       return;
     }
-    if(args==='preparation'){
-      this.props.history.push('/home/st5');
+    if (args === 'preparation') {
+      this
+        .props
+        .history
+        .push('/home/st5');
       return;
     }
   }
@@ -41,26 +59,18 @@ export default class HomeBody extends React.Component {
   componentWillMount() {
     //根据用户名查询数据
     const UserID = this.props.user.loginname
-    this.props.getOrderData(UserID);
+    this
+      .props
+      .getOrderData(UserID);
   }
 
-  // componentDidMount() {
-  //   //更新视图数据
-  //   const data = this.props.status.data;
-  //   this.setState({
-  //     po: data.PoSum,
-  //     items: data.SoSum,
-  //     quantity: data.PcsSum,
-  //     onWay: data.State1,
-  //     in: data.State2,
-  //     ready: data.State3,
-  //     packed: data.State4,
-  //     preparation: data.State5
-  //   });
-  // }
+  // componentDidMount() {   //更新视图数据   const data = this.props.status.data;
+  // this.setState({     po: data.PoSum,     items: data.SoSum,     quantity:
+  // data.PcsSum,     onWay: data.State1,     in: data.State2,     ready:
+  // data.State3,     packed: data.State4,     preparation: data.State5   }); }
 
   render() {
-    
+
     //数量样式开始
     const styles = {
       po: {
@@ -82,8 +92,7 @@ export default class HomeBody extends React.Component {
         width: 'auto',
         height: 'auto',
         backgroundColor: '#4CD664'
-      },
-      in: {
+      }, in: {
         width: 'auto',
         height: 'auto',
         backgroundColor: '#0475F1'
@@ -104,24 +113,85 @@ export default class HomeBody extends React.Component {
         backgroundColor: '#DC5446'
       }
     };
-    const icon={
-      po:(<Chip style={styles.po} labelColor={'#FFFFFF'}>{this.props.status.data.PoSum}</Chip>),
-      items:(<Chip style={styles.items} labelColor={'#FFFFFF'}>{this.props.status.data.SoSum}</Chip>),
-      quantity:(<Chip style={styles.quantity} labelColor={'#FFFFFF'}>{this.props.status.data.PcsSum}</Chip>),
-      onWay:(<Chip style={styles.onWay} labelColor={'#FFFFFF'}>{this.props.status.data.State1}</Chip>),
-      in:(<Chip style={styles.in} labelColor={'#FFFFFF'}>{this.props.status.data.State2}</Chip>),
-      ready:(<Chip style={styles.ready} labelColor={'#FFFFFF'}>{this.props.status.data.State3}</Chip>),
-      packed:(<Chip style={styles.packed} labelColor={'#FFFFFF'}>{this.props.status.data.State4}</Chip>),
-      preparation:(<Chip style={styles.preparation} labelColor={'#FFFFFF'}>{this.props.status.data.State5}</Chip>)
+    const icon = {
+      po: (
+        <Chip style={styles.po} labelColor={'#FFFFFF'}>{this
+            .props
+            .status
+            .data
+            .hasOwnProperty("PoSum")
+            ? this.props.status.data.PoSum
+            : 0}</Chip>
+      ),
+      items: (
+        <Chip style={styles.items} labelColor={'#FFFFFF'}>{this
+            .props
+            .status
+            .data
+            .hasOwnProperty("SoSum")
+            ? this.props.status.data.SoSum
+            : 0}</Chip>
+      ),
+      quantity: (
+        <Chip style={styles.quantity} labelColor={'#FFFFFF'}>{this
+            .props
+            .status
+            .data
+            .hasOwnProperty("PcsSum")
+            ? this.props.status.data.PcsSum
+            : 0}</Chip>
+      ),
+      onWay: (
+        <Chip style={styles.onWay} labelColor={'#FFFFFF'}>{this
+            .props
+            .status
+            .data
+            .hasOwnProperty("State1")
+            ? this.props.status.data.State1
+            : 0}</Chip>
+      ), in: (
+        <Chip style={styles. in} labelColor={'#FFFFFF'}>{this
+            .props
+            .status
+            .data
+            .hasOwnProperty("State2")
+            ? this.props.status.data.State2
+            : 0}</Chip>
+      ),
+      ready: (
+        <Chip style={styles.ready} labelColor={'#FFFFFF'}>{this
+            .props
+            .status
+            .data
+            .hasOwnProperty("State3")
+            ? this.props.status.data.State3
+            : 0}</Chip>
+      ),
+      packed: (
+        <Chip style={styles.packed} labelColor={'#FFFFFF'}>{this
+            .props
+            .status
+            .data
+            .hasOwnProperty("State4")
+            ? this.props.status.data.State4
+            : 0}</Chip>
+      ),
+      preparation: (
+        <Chip style={styles.preparation} labelColor={'#FFFFFF'}>{this
+            .props
+            .status
+            .data
+            .hasOwnProperty("State5")
+            ? this.props.status.data.State5
+            : 0}</Chip>
+      )
     }
-    //数量样式结束
-
-    //加载框开始
+    //数量样式结束 加载框开始
     const doing = this.props.status.doing;
-		let loadStatus = 'loading';
-		if(!doing){
-			loadStatus = 'hide';
-		}
+    let loadStatus = 'loading';
+    if (!doing) {
+      loadStatus = 'hide';
+    }
 
     const style = {
       container: {
@@ -132,17 +202,17 @@ export default class HomeBody extends React.Component {
         display: 'inline-block',
         position: 'relative'
       },
-		  displayNone: {
-		  	display: 'none'
-		  },
-		  displayBlock: {
-		  	display: 'block'
-		  }
+      displayNone: {
+        display: 'none'
+      },
+      displayBlock: {
+        display: 'block'
+      }
     };
-    //加载框结束 
+    //加载框结束
 
     return (
-      <MuiThemeProvider> 
+      <MuiThemeProvider>
         <div>
           <div style={style.container}>
             <RefreshIndicator
@@ -152,20 +222,51 @@ export default class HomeBody extends React.Component {
               status={loadStatus}
               style={style.refresh}/>
           </div>
-          <div style={doing ? style.displayNone:style.displayBlock} >
-          <List>
-            <Subheader style={{textAlign: 'center'}}>Order Summary</Subheader>
-            <ListItem primaryText="PO" onClick={()=>this.getStateTable('po')} rightIcon={icon.po}/>
-            <ListItem primaryText="Items" onClick={()=>this.getStateTable('po')} rightIcon={icon.items}/>
-            <ListItem primaryText="Quantity" onClick={()=>this.getStateTable('po')} rightIcon={icon.quantity}/>
-            <Divider/>
-            <Subheader style={{textAlign: 'center'}}>Order Info List(PCS)</Subheader>
-            <ListItem primaryText="On Way" onClick={()=>this.getStateTable('onWay')} rightIcon={icon.onWay}/>
-            <ListItem primaryText="In Transit at Port" onClick={()=>this.getStateTable('in')} rightIcon={icon.in}/>
-            <ListItem primaryText="Ready for Departure" onClick={()=>this.getStateTable('ready')} rightIcon={icon.ready}/>
-            <ListItem primaryText="Packed but no Shipping Space Confirmation" onClick={()=>this.getStateTable('packed')} rightIcon={icon.packed}/>
-            <ListItem primaryText="Preparation" onClick={()=>this.getStateTable('preparation')} rightIcon={icon.preparation}/>
-          </List>
+          <div
+            style={doing
+            ? style.displayNone
+            : style.displayBlock}>
+            <List>
+              <Subheader style={{
+                textAlign: 'center'
+              }}>Order Summary</Subheader>
+              <ListItem
+                primaryText="PO"
+                onClick={() => this.getStateTable('po')}
+                rightIcon={icon.po}/>
+              <ListItem
+                primaryText="Items"
+                onClick={() => this.getStateTable('po')}
+                rightIcon={icon.items}/>
+              <ListItem
+                primaryText="Quantity"
+                onClick={() => this.getStateTable('po')}
+                rightIcon={icon.quantity}/>
+              <Divider/>
+              <Subheader style={{
+                textAlign: 'center'
+              }}>Order Info List(PCS)</Subheader>
+              <ListItem
+                primaryText="On Way"
+                onClick={() => this.getStateTable('onWay')}
+                rightIcon={icon.onWay}/>
+              <ListItem
+                primaryText="In Transit at Port"
+                onClick={() => this.getStateTable('in')}
+                rightIcon={icon. in}/>
+              <ListItem
+                primaryText="Ready for Departure"
+                onClick={() => this.getStateTable('ready')}
+                rightIcon={icon.ready}/>
+              <ListItem
+                primaryText="Packed but no Shipping Space Confirmation"
+                onClick={() => this.getStateTable('packed')}
+                rightIcon={icon.packed}/>
+              <ListItem
+                primaryText="Preparation"
+                onClick={() => this.getStateTable('preparation')}
+                rightIcon={icon.preparation}/>
+            </List>
           </div>
         </div>
       </MuiThemeProvider>

@@ -39,16 +39,17 @@ export default class LoginForm extends React.Component {
 		}
 	}
 	
-	componentWillMount(){ 
-		this.goTo();
-	}
+	// componentWillMount(){ 
+	// 	this.goTo();
+	// }
 
-	shouldComponentUpdate(nextProps){
+	componentWillUpdate(nextProps){
     	let user = nextProps.user; //注意：user使用this.props.user时取不到数据
     	if(user && Object.keys(user).length > 0){
 			this.props.history.push('/home')
+			return true
     	}
-    	return true
+    	return false
   	}
 
 	render(){

@@ -52,7 +52,6 @@ const ChartData = (UserID) => {
 			arr[0].pieChartData[2].value=data.State3
 			arr[0].pieChartData[3].value=data.State4
 			arr[0].pieChartData[4].value=data.State5
-			console.log('1');
 			//获取bar图表数据
 			return fetch(urlBar, {
 		  	method: 'GET',
@@ -62,7 +61,6 @@ const ChartData = (UserID) => {
 			}).then(response => {
 				return response.json()
 			}).then(data => {
-				console.log('2');
 					arr[0].barChartData[0].noX.push(data.OnePlus)
 					arr[0].barChartData[0].noX.push(data.One)
 					arr[0].barChartData[0].noX.push(data.Now)
@@ -74,16 +72,12 @@ const ChartData = (UserID) => {
 					arr[0].barChartData[0].haveX.push(data.NowX);
 					arr[0].barChartData[0].haveX.push(data.NowPlusX);
 					arr[0].barChartData[0].haveX.push(data.NowPlusPlusX);
-					console.log('3');
-					console.log(arr);
 					dispatch(doneStatus({
 						doing: false,
 						chartData: arr
 					}))
 					
 			}).catch((ex) => {
-				console.log('4');
-				console.log(ex);
 				dispatch(doneStatus({
 				doing: false,
 					chartData:[{
@@ -100,7 +94,6 @@ const ChartData = (UserID) => {
 				}))
 			})
 		}).catch((ex) => {
-			console.log('5');
 			dispatch(doneStatus({
 				doing: false,
 					chartData:[{

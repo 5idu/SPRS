@@ -16,11 +16,6 @@ export default class ChartBody extends React.Component {
         super(props);
     }
 
-    componentWillMount() {
-        const UserID = this.props.user.loginname
-		this.props.getChartData(UserID) //获取图表数据
-    }
-
     getTimeArray() {
         var TimeArray = [];
 		var now = new Date();
@@ -86,6 +81,9 @@ export default class ChartBody extends React.Component {
     }
 
     componentDidMount() {
+		const UserID = this.props.user.loginname
+		this.props.getChartData(UserID) //获取图表数据
+		
         this.initBar()
         this.initPie()
     }

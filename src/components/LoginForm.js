@@ -38,7 +38,8 @@ export default class LoginForm extends React.Component {
 			this.props.history.push('/home');
 		}
 	}
-	componentWillMount(){
+	
+	componentWillMount(){ 
 		this.goTo();
 	}
 
@@ -82,18 +83,14 @@ export default class LoginForm extends React.Component {
 				  	<TextField
 				      hintText="UserName"
 					  floatingLabelText="UserName"
-				      hintStyle={{"width":"100%"}}
 				      fullWidth={true}
-					  inputStyle={{textAlign:'center'}}
 				      style={{marginBottom:30}}
 				      onChange={this.handleUserNameChange}
 				    />
                     <TextField
 				      hintText="PassWord"
 					  floatingLabelText="PassWord"
-				      hintStyle={{"width":"100%"}}
 				      fullWidth={true}
-					  inputStyle={{textAlign:'center'}}
 				      style={{marginBottom:30}}
 				      onChange={this.handlePassWordChange}
 				      errorText={errorText}

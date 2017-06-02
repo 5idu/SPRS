@@ -17,6 +17,9 @@ import QueryByPn from './QueryByPn';
 import QueryByDescription from './QueryByDescription';
 import ListForMatnr from './ListForMatnr';
 import ListForDescription from './ListForDescription';
+import ListSearch from './ListSearch';
+import DetailForHistorySoItem from './DetailForHistorySoItem';
+import TrendChart from './TrendChart'
 
 const routes = [
     {
@@ -137,8 +140,24 @@ const routes = [
     },{
         path: '/historys',
         component: Historys,
+        exact: true,
         name: 'Historys'
-    }, {
+    },{
+        path: '/historys/listSearch/:type/:beginTime/:overTime/:LiaoNum',
+        component: ListSearch,
+        exact: true,
+        name: 'Historical Details List'
+    },{
+        path: '/historys/listSearch/:so/:item',
+        component: DetailForHistorySoItem,
+        exact: true,
+        name: 'Historical Details'
+    },{
+        path: '/historys/trendChart/:type/:beginTime/:overTime/:LiaoNum',
+        component: TrendChart,
+        exact: true,
+        name: 'Trend Chart of Shipments'
+    },{
         path: '/about',
         component: About,
         name: 'About'

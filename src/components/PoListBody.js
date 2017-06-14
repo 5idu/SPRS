@@ -15,28 +15,6 @@ export default class PoListBody extends React.Component {
     this.props.getPoListData(UserID,State);
   }
 
-  // componentDidMount() {
-  //   //更新数据
-  //   let status = this.props.status;
-  //   if(status.error===''){
-  //       this.setState({
-  //           data: status.data
-  //       });
-  //   }
-  // }
-
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   let shouldUpdate = false
-  //   if (this.props.status.poListdata !== nextProps.status.poListdata) {
-  //     shouldUpdate = true
-  //   }   
-  //   return shouldUpdate
-  // }
-
-  // handleCellClick (rowNumber, columnNumber, event) {
-  //    console.log(event.target.innerHTML);
-  // }
-
   handleRowSelection(rows) {
     let State = this.props.location.pathname.split('/')[2];
     for (let i = 0; i < rows.length; i++) {
@@ -47,6 +25,10 @@ export default class PoListBody extends React.Component {
 
   render() {
 
+    let poListdata=[];
+    if(this.props.status.poListdata){
+        poListdata= this.props.status.poListdata
+    }
     //加载框开始
     const doing = this.props.status.doing;
 		let loadStatus = 'loading';
@@ -83,7 +65,7 @@ export default class PoListBody extends React.Component {
           </TableRow>
         </TableHeader>
         <TableBody displayRowCheckbox={false}>
-          {this.props.status.poListdata.map((item,key) =>    
+          {poListdata.map((item,key) =>    
             <TableRow key={key} value={item}>              
               <TableRowColumn>{item.SO}</TableRowColumn>
               <TableRowColumn>{item.EDATU}</TableRowColumn>          

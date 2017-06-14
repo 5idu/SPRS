@@ -60,7 +60,20 @@ export default class ChartBody extends React.Component {
 	}
 
     initPie() {
-        let pieChartData = this.props.status.chartData[0].pieChartData //外部传入的data数据
+		let pieChartData = [
+			{value:0,name:"On Way"},
+            {value:0,name:'In Transit at Port'},
+			{value:0,name:'Ready for Departure'},
+			{value:0,name:'Packed but no Shipping'},
+			{value:0,name:'Preparation'}
+		];
+		let data = this.props.status.data;
+		pieChartData[0].value=data.State1
+		pieChartData[1].value=data.State2
+		pieChartData[2].value=data.State3
+		pieChartData[3].value=data.State4
+		pieChartData[4].value=data.State5
+
         let myChart = echarts.init(this.refs.pieChart) //初始化echarts
 
         //我们要定义一个setPieOption函数将data传入option里面
@@ -71,7 +84,24 @@ export default class ChartBody extends React.Component {
 
     initBar() {
 		
-        let barChartData = this.props.status.chartData[0].barChartData
+		let barChartData = [{
+			"noX":[],
+			"haveX":[]
+		}];
+		let data = this.props.status.chartBarData;
+
+		barChartData[0].noX.push(data.OnePlus)
+		barChartData[0].noX.push(data.One)
+		barChartData[0].noX.push(data.Now)
+		barChartData[0].noX.push(data.NowPlus)
+		barChartData[0].noX.push(data.NowPlusPlus)
+
+		barChartData[0].haveX.push(data.OnePlusX)
+		barChartData[0].haveX.push(data.OneX);
+		barChartData[0].haveX.push(data.NowX);
+		barChartData[0].haveX.push(data.NowPlusX);
+		barChartData[0].haveX.push(data.NowPlusPlusX);
+
         let myChart = echarts.init(this.refs.barChart) //初始化echarts
 
         //我们要定义一个setBarOption函数将data传入option里面
@@ -81,8 +111,8 @@ export default class ChartBody extends React.Component {
     }
 
     componentDidMount() {
-		const UserID = this.props.user.loginname
-		this.props.getChartData(UserID) //获取图表数据
+		// const UserID = this.props.user.loginname
+		// this.props.getChartData(UserID) //获取图表数据
 		
         this.initBar()
         this.initPie()

@@ -6,38 +6,39 @@ import ListForMatnrBody from '../components/ListForMatnrBody';
 import { todoStatus,doingStatus,doneStatus } from '../store/actions'
 
 const listForMatnr = (UserID,Matnr) => {
-    return dispatch => {	
-		dispatch(todoStatus({
-			doing: true,
-            listForMatnrData: []
-		}))
+    return (dispatch,getState) => {	
+		let state = getState()
+		let status = state.status
+
+		let doing = status.doing
+		if(doing){
+			return;
+		}
 
 		let url = "http://jisapp.jhtgroup.com/AppServer/Home/getSoItemsListForMatnr?UserID="+ UserID +"&Matnr="+ Matnr;
+
+		status.doing = true
+		status.done = false
+		dispatch(todoStatus(status))
 
 		return fetch(url, {
 		  method: 'GET',
 		  headers: {
-				'Content-Type': 'application/json'
+			'Content-Type': 'application/json'
 		  }
 		}).then(response => {
 			return response.json()
-		}).then(data => {
-			if(data == null||data == ''){
-                dispatch(doneStatus({
-				    doing: false,
-				    listForMatnrData: [] 
-			    }))
-            }else{
-                dispatch(doneStatus({
-				    doing: false,
-				    listForMatnrData: data 
-			    }))
-    	    }
+		}).then(json => {
+      let listForMatnrData = json
+			status.listForMatnrData = listForMatnrData;			
+			status.doing = false
+			status.done = true
+			dispatch(doneStatus(status))		
 		}).catch((ex) => {
-			dispatch(doneStatus({
-				doing: false,
-                listForMatnrData: [] 
-			}))
+			status.error = "Something mistake :" + ex;
+			status.doing = false
+			status.done = true
+			dispatch(doneStatus(status))
 		})
 	}
 }

@@ -5,6 +5,33 @@ import Header from '../components/Header';
 import HistoryBody from '../components/HistoryBody';
 import { todoStatus,doingStatus,doneStatus } from '../store/actions'
 
+const trendChart = (UserID,Type,BeginTime,OverTime,LiaoNum) => {
+    return (dispatch,getState) => {	
+		let state = getState()
+		let status = state.status
+
+		let url = "http://jisapp.jhtgroup.com/AppServer/Home/HistorySearch?UserID="+ UserID +"&Type="+ Type +"&BeginTime="+ BeginTime +"&OverTime="+ OverTime +"&LiaoNum="+ LiaoNum;
+
+		return fetch(url, {
+		  method: 'GET',
+		  headers: {
+			'Content-Type': 'application/json'
+		  }
+		}).then(response => {
+			return response.json()
+		}).then(json => {
+			status.trendChartData = json;			
+			status.doing = false
+			status.done = true
+			dispatch(doneStatus(status))		
+		}).catch((ex) => {
+			status.error = "Something mistake :" + ex;
+			status.doing = false
+			status.done = true
+			dispatch(doneStatus(status))
+		})
+	}
+}
 
 const mapStateToProps = (state) => {
   return {
@@ -14,7 +41,11 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-	return {}
+	return {
+		getTrendChartData:(UserID,Type,BeginTime,OverTime,LiaoNum) => {
+    	dispatch(trendChart(UserID,Type,BeginTime,OverTime,LiaoNum))
+    }
+	}
 }
 
 const MainBody = connect(

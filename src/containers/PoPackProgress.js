@@ -6,36 +6,39 @@ import PoPackProgressBody from '../components/PoPackProgressBody';
 import { todoStatus,doingStatus,doneStatus } from '../store/actions'
 
 const poPackProgressData = (SONum,ItemsNum,State,packListNo) => {
-    return dispatch => {	
-		dispatch(todoStatus({
-			doing: true,
-      poPackProgressdata: {
-				'transport':[]
-			}
-		}))
-  
-    let url = "http://jisapp.jhtgroup.com/AppServer/Home/getDatailForSoItemsStaPack?SONum="+ SONum +"&ItemsNum="+ ItemsNum +"&State="+ State +"&packListNo="+ packListNo;
+   return (dispatch,getState) => {	
+		let state = getState()
+		let status = state.status
+
+		let doing = status.doing
+		if(doing){
+			return;
+		}
+
+		let url = "http://jisapp.jhtgroup.com/AppServer/Home/getDatailForSoItemsStaPack?SONum="+ SONum +"&ItemsNum="+ ItemsNum +"&State="+ State +"&packListNo="+ packListNo;
+
+		status.doing = true
+		status.done = false
+		dispatch(todoStatus(status))
 
 		return fetch(url, {
 		  method: 'GET',
 		  headers: {
-				'Content-Type': 'application/json'
+			'Content-Type': 'application/json'
 		  }
 		}).then(response => {
 			return response.json()
-		}).then(data => {
-			dispatch(doneStatus({
-				doing: false,
-				poPackProgressdata: data 
-			}))
-            
+		}).then(json => {
+            let poPackProgressdata = json
+			status.poPackProgressdata = poPackProgressdata;			
+			status.doing = false
+			status.done = true
+			dispatch(doneStatus(status))		
 		}).catch((ex) => {
-			dispatch(doneStatus({
-				doing: false,
-        poPackProgressdata: {
-					'transport':[]
-				}
-			}))
+			status.error = "Something mistake :" + ex;
+			status.doing = false
+			status.done = true
+			dispatch(doneStatus(status))
 		})
 	}
 }

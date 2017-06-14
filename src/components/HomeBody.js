@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDom, { unstable_batchedUpdates } from 'react-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 import {List, ListItem} from 'material-ui/List';
@@ -57,20 +58,33 @@ export default class HomeBody extends React.Component {
   }
 
   componentWillMount() {
-    //根据用户名查询数据
     const UserID = this.props.user.loginname
-    this
-      .props
-      .getOrderData(UserID);
+    this.props.getChartBarData(UserID);
   }
 
-  // componentDidMount() {   //更新视图数据   const data = this.props.status.data;
-  // this.setState({     po: data.PoSum,     items: data.SoSum,     quantity:
-  // data.PcsSum,     onWay: data.State1,     in: data.State2,     ready:
-  // data.State3,     packed: data.State4,     preparation: data.State5   }); }
+//   componentWillReceiveProps(nextProps){
+//     if(nextProps.status.data){
+//         this.setState({
+//             PoSum: nextProps.status.data.PoSum,
+//             SoSum: nextProps.status.data.SoSum,
+//             PcsSum: nextProps.status.data.PcsSum,
+//             State1: nextProps.status.data.State1,
+//             State2: nextProps.status.data.State2,
+//             State3: nextProps.status.data.State3,
+//             State4: nextProps.status.data.State4,
+//             State5: nextProps.status.data.State5
+//         })
+//     }
+      
+//   }
+
+//   shouldComponentUpdate(nextProps,nextState){
+
+//       //return nextState.PoSum === this.state.PoSum 
+//       return nextProps.status.data!==this.props.status.data
+//   }
 
   render() {
-
     //数量样式开始
     const styles = {
       po: {
@@ -115,75 +129,27 @@ export default class HomeBody extends React.Component {
     };
     const icon = {
       po: (
-        <Chip style={styles.po} labelColor={'#FFFFFF'}>{this
-            .props
-            .status
-            .data
-            .hasOwnProperty("PoSum")
-            ? this.props.status.data.PoSum
-            : 0}</Chip>
+        <Chip style={styles.po} labelColor={'#FFFFFF'}>{this.props.status.data?this.props.status.data.PoSum:0}</Chip>
       ),
       items: (
-        <Chip style={styles.items} labelColor={'#FFFFFF'}>{this
-            .props
-            .status
-            .data
-            .hasOwnProperty("SoSum")
-            ? this.props.status.data.SoSum
-            : 0}</Chip>
+        <Chip style={styles.items} labelColor={'#FFFFFF'}>{this.props.status.data?this.props.status.data.SoSum:0}</Chip>
       ),
       quantity: (
-        <Chip style={styles.quantity} labelColor={'#FFFFFF'}>{this
-            .props
-            .status
-            .data
-            .hasOwnProperty("PcsSum")
-            ? this.props.status.data.PcsSum
-            : 0}</Chip>
+        <Chip style={styles.quantity} labelColor={'#FFFFFF'}>{this.props.status.data?this.props.status.data.PcsSum:0}</Chip>
       ),
       onWay: (
-        <Chip style={styles.onWay} labelColor={'#FFFFFF'}>{this
-            .props
-            .status
-            .data
-            .hasOwnProperty("State1")
-            ? this.props.status.data.State1
-            : 0}</Chip>
+        <Chip style={styles.onWay} labelColor={'#FFFFFF'}>{this.props.status.data?this.props.status.data.State1:0}</Chip>
       ), in: (
-        <Chip style={styles. in} labelColor={'#FFFFFF'}>{this
-            .props
-            .status
-            .data
-            .hasOwnProperty("State2")
-            ? this.props.status.data.State2
-            : 0}</Chip>
+        <Chip style={styles. in} labelColor={'#FFFFFF'}>{this.props.status.data?this.props.status.data.State2:0}</Chip>
       ),
       ready: (
-        <Chip style={styles.ready} labelColor={'#FFFFFF'}>{this
-            .props
-            .status
-            .data
-            .hasOwnProperty("State3")
-            ? this.props.status.data.State3
-            : 0}</Chip>
+        <Chip style={styles.ready} labelColor={'#FFFFFF'}>{this.props.status.data?this.props.status.data.State3:0}</Chip>
       ),
       packed: (
-        <Chip style={styles.packed} labelColor={'#FFFFFF'}>{this
-            .props
-            .status
-            .data
-            .hasOwnProperty("State4")
-            ? this.props.status.data.State4
-            : 0}</Chip>
+        <Chip style={styles.packed} labelColor={'#FFFFFF'}>{this.props.status.data?this.props.status.data.State4:0}</Chip>
       ),
       preparation: (
-        <Chip style={styles.preparation} labelColor={'#FFFFFF'}>{this
-            .props
-            .status
-            .data
-            .hasOwnProperty("State5")
-            ? this.props.status.data.State5
-            : 0}</Chip>
+        <Chip style={styles.preparation} labelColor={'#FFFFFF'}>{this.props.status.data?this.props.status.data.State5:0}</Chip>
       )
     }
     //数量样式结束 加载框开始
@@ -273,3 +239,4 @@ export default class HomeBody extends React.Component {
     )
   }
 }
+

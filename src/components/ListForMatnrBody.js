@@ -24,7 +24,11 @@ export default class ListForMatnrBody extends React.Component {
   }
 
   render() {
-  
+    
+    let listForMatnrData = []
+    if(this.props.status.listForMatnrData){
+        listForMatnrData = this.props.status.listForMatnrData
+    }
     //加载框开始
     const doing = this.props.status.doing;
 		let loadStatus = 'loading';
@@ -62,7 +66,7 @@ export default class ListForMatnrBody extends React.Component {
           </TableRow>
         </TableHeader>
         <TableBody displayRowCheckbox={false}>
-          {this.props.status.listForMatnrData.map((item,key) =>    
+          {listForMatnrData.map((item,key) =>    
             <TableRow key={key} value={item}>              
               <TableRowColumn>{item.SONum}</TableRowColumn>
               <TableRowColumn>{item.ItemsNum}</TableRowColumn>          

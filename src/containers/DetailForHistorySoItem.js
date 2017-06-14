@@ -6,13 +6,20 @@ import DetailForHistorySoItemBody from '../components/DetailForHistorySoItemBody
 import { todoStatus,doingStatus,doneStatus } from '../store/actions'
 
 const listSearchSOItem = (SONum,ItemNum) => {
-    return dispatch => {	
-		dispatch(todoStatus({
-			doing: true,
-            listSearchSOItemData: {}
-		}))
+    return (dispatch,getState) => {	
+		let state = getState()
+		let status = state.status
+
+		let doing = status.doing
+		if(doing){
+			return;
+		}
 
 		let url = "http://jisapp.jhtgroup.com/AppServer/Home/getDetailForHistorySoItem?SONum="+ SONum +"&ItemNum="+ ItemNum;
+
+		status.doing = true
+		status.done = false
+		dispatch(todoStatus(status))
 
 		return fetch(url, {
 		  method: 'GET',
@@ -21,16 +28,17 @@ const listSearchSOItem = (SONum,ItemNum) => {
 		  }
 		}).then(response => {
 			return response.json()
-		}).then(data => {
-			dispatch(doneStatus({
-                doing: false,
-				listSearchSOItemData: data 
-		    }))
+		}).then(json => {
+            let listSearchSOItemData = json
+			status.listSearchSOItemData = listSearchSOItemData;			
+			status.doing = false
+			status.done = true
+			dispatch(doneStatus(status))		
 		}).catch((ex) => {
-			dispatch(doneStatus({
-				doing: false,
-                listSearchSOItemData: {} 
-			}))
+			status.error = "Something mistake :" + ex;
+			status.doing = false
+			status.done = true
+			dispatch(doneStatus(status))
 		})
 	}
 }

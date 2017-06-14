@@ -35,22 +35,35 @@ export default class LoginForm extends React.Component {
 	goTo = () => {
 		let user = this.props.user;
 		if(user && Object.keys(user).length > 0){
+
+			//获取数据，传递给子组件,这样子组件就是无状态的
+			if(user.loginname){
+				this.props.getOrderData(user.loginname);
+			}else{
+				this.props.getOrderData(this.state.UserName);
+			}
 			this.props.history.push('/home');
 		}
 	}
 	
-	// componentWillMount(){ 
-	// 	this.goTo();
-	// }
+	componentWillMount(){
+		this.goTo()
+	}
 
-	componentWillUpdate(nextProps){
-    	let user = nextProps.user; //注意：user使用this.props.user时取不到数据
+	shouldComponentUpdate(nextProps){
+		let user = nextProps.user; 
     	if(user && Object.keys(user).length > 0){
+			
+			//获取数据，传递给子组件,这样子组件就是无状态的
+			if(user.loginname){
+				this.props.getOrderData(user.loginname);
+			}else{
+				this.props.getOrderData(this.state.UserName);
+			}
 			this.props.history.push('/home')
-			return true
     	}
-    	return false
-  	}
+		return true
+	}
 
 	render(){
 		const errorText = this.props.status.error;

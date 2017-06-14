@@ -11,23 +11,23 @@ const getUser = (UserName,PassWord) => {
 			error: '',
 			doing: true
 		}))
-
 		if(UserName.length <= 0){
-		  return dispatch(doneStatus({
+			dispatch(doneStatus({
 				error:"UserName can't be empty",
 				doing : false
-			}));
+			}))
+			return;
 		}
-		
-		if(PassWord.length <= 0){
-			return dispatch(doneStatus({
+        if(PassWord.length <= 0){
+			dispatch(doneStatus({
 				error:"PassWord can't be empty",
 				doing : false
-			}));
+			}))
+			return;
 		}
 
 		let url = "http://jisapp.jhtgroup.com/AppServer/Home/Login?UserName="+ UserName +"&PassWord="+ PassWord;
-
+        
 		return fetch(url, {
 		  method: 'GET',
 		  headers: {
@@ -38,13 +38,14 @@ const getUser = (UserName,PassWord) => {
 		}).then(data => {
 			if(data.State == '1'){
 				let user = {
-		            loginname: UserName     
-		        };
-		        dispatch(saveUser(user));
+		            loginname: UserName
+		        }
+		        dispatch(saveUser(user))
 		        dispatch(doneStatus({
-							error: '',
-							doing: false
-						}))
+					error: '',
+					doing: false
+				}))
+
 			}else{
 				dispatch(doneStatus({
 					error: "UserName or PassWord is not right",
@@ -60,6 +61,35 @@ const getUser = (UserName,PassWord) => {
 	}
 }
 
+const orderData = (UserID) => {
+	return (dispatch,getState) => {	
+		let state = getState()
+		let status = state.status
+
+	  let url = "http://jisapp.jhtgroup.com/AppServer/Home/Main?UserID="+ UserID;
+
+		return fetch(url, {
+		   method: 'GET',
+		   headers: {
+				'Content-Type': 'application/json'
+		   }
+		}).then(response => {
+			return response.json()
+		}).then(json => {
+			status.doing = false
+			status.done = true
+			status.data = json
+			dispatch(doneStatus(status))
+			
+		}).catch((ex) => {
+			status.error = "Something mistake :" + ex;
+			status.doing = false
+			status.done = true
+			dispatch(doneStatus(status))
+		})
+	}
+}
+
 const mapStateToProps = (state) => {
   return {
     user: state.user,
@@ -70,7 +100,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     login: (UserName,PassWord) => {
-		dispatch(getUser(UserName,PassWord))
+			dispatch(getUser(UserName,PassWord))
+    },
+		getOrderData:(UserID) => {
+    	dispatch(orderData(UserID))
     }
   }
 }

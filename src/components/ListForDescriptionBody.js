@@ -24,7 +24,11 @@ export default class ListForDescriptionBody extends React.Component {
   }
 
   render() {
-  
+    
+    let listForDescData = []
+    if(this.props.status.listForDescData){
+        listForDescData = this.props.status.listForDescData
+    }
     //加载框开始
     const doing = this.props.status.doing;
 		let loadStatus = 'loading';
@@ -60,7 +64,7 @@ export default class ListForDescriptionBody extends React.Component {
           </TableRow>
         </TableHeader>
         <TableBody displayRowCheckbox={false}>
-          {this.props.status.listForDescData.map((item,key) =>    
+          {listForDescData.map((item,key) =>    
             <TableRow key={key} value={item}>              
               <TableRowColumn>{item.MAKTXEN}</TableRowColumn>      
             </TableRow>

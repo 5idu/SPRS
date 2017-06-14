@@ -45,7 +45,13 @@ export default class TrendChartBody extends React.Component {
     }
 
     initLine() {
-        let lineChartData = this.props.status.trendChartData.order //外部传入的data数据
+        
+        let lineChartData = {"order":[{"Time":"201607","Num":9}]}
+
+        if(this.props.status.trendChartData){
+            lineChartData = this.props.status.trendChartData.order //外部传入的data数据
+        }
+        
         let myChart = echarts.init(this.refs.lineChart) //初始化echarts
 
         //我们要定义一个setPieOption函数将data传入option里面
@@ -71,31 +77,6 @@ export default class TrendChartBody extends React.Component {
     }
 
     componentDidMount() {
-        let UserID = this.props.user.loginname;
-        let Type = this
-            .props
-            .location
-            .pathname
-            .split('/')[3];
-        let BeginTime = this
-            .props
-            .location
-            .pathname
-            .split('/')[4];
-        let OverTime = this
-            .props
-            .location
-            .pathname
-            .split('/')[5];
-        let LiaoNum = this
-            .props
-            .location
-            .pathname
-            .split('/')[6];
-        this
-            .props
-            .getTrendChartData(UserID, Type, BeginTime, OverTime, LiaoNum);
-
         this.initLine()
     }
 
@@ -160,7 +141,7 @@ export default class TrendChartBody extends React.Component {
     }
 
     render() {
-        
+
         //加载框开始
         const doing = this.props.status.doing;
         let loadStatus = 'loading';
@@ -235,15 +216,11 @@ export default class TrendChartBody extends React.Component {
                                 secondary={true}/><br/>
                             Shipout Qty (PCS):
                             <FlatButton
-                                label={this.props.status.trendChartData.hasOwnProperty('PCS')
-                                ? this.props.status.trendChartData.PCS
-                                : 0}
+                                label={this.props.status.trendChartData?this.props.status.trendChartData.PCS:0}
                                 secondary={true}/><br/>
                             Shipout Amount ($US):
                             <FlatButton
-                                label={this.props.status.trendChartData.hasOwnProperty('Amount')
-                                ? this.props.status.trendChartData.Amount
-                                : 0}
+                                label={this.props.status.trendChartData?this.props.status.trendChartData.Amount:0}
                                 secondary={true}/>
                         </div>
                     </div>

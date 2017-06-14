@@ -49,7 +49,11 @@ export default class PoPackTableBody extends React.Component {
   }
 
   render() {
-  
+    
+    let poPackTabledata = []
+    if(this.props.status.poPackTabledata){
+        poPackTabledata = this.props.status.poPackTabledata
+    }
     //加载框开始
     const doing = this.props.status.doing;
 		let loadStatus = 'loading';
@@ -103,7 +107,7 @@ export default class PoPackTableBody extends React.Component {
                 </TableRow>
             </TableHeader>
             <TableBody displayRowCheckbox={false}>
-                {this.props.status.poPackTabledata.map((item,key) =>    
+                {poPackTabledata.map((item,key) =>    
                     <TableRow key={key} value={item}>              
                         <TableRowColumn>{item.PackListNo}</TableRowColumn>
                         <TableRowColumn>{item.T_QTY}</TableRowColumn>          

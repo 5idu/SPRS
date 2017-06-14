@@ -6,13 +6,20 @@ import ListSearchBody from '../components/ListSearchBody';
 import { todoStatus,doingStatus,doneStatus } from '../store/actions'
 
 const listSearch = (UserID,Type,BeginTime,OverTime,LiaoNum) => {
-    return dispatch => {	
-		dispatch(todoStatus({
-			doing: true,
-            listSearchData: []
-		}))
+    return (dispatch,getState) => {	
+		let state = getState()
+		let status = state.status
+
+		let doing = status.doing
+		if(doing){
+			return;
+		}
 
 		let url = "http://jisapp.jhtgroup.com/AppServer/Home/HistorySearch?UserID="+ UserID +"&Type="+ Type +"&BeginTime="+ BeginTime +"&OverTime="+ OverTime +"&LiaoNum="+ LiaoNum;
+
+		status.doing = true
+		status.done = false
+		dispatch(todoStatus(status))
 
 		return fetch(url, {
 		  method: 'GET',
@@ -21,23 +28,17 @@ const listSearch = (UserID,Type,BeginTime,OverTime,LiaoNum) => {
 		  }
 		}).then(response => {
 			return response.json()
-		}).then(data => {
-			if(data == null||data == ''){
-                dispatch(doneStatus({
-				    doing: false,
-				    listSearchData: [] 
-			    }))
-            }else{
-                dispatch(doneStatus({
-				    doing: false,
-				    listSearchData: data 
-			    }))
-    	    }
+		}).then(json => {
+            let listSearchData = json
+			status.listSearchData = listSearchData;			
+			status.doing = false
+			status.done = true
+			dispatch(doneStatus(status))		
 		}).catch((ex) => {
-			dispatch(doneStatus({
-				doing: false,
-                listSearchData: [] 
-			}))
+			status.error = "Something mistake :" + ex;
+			status.doing = false
+			status.done = true
+			dispatch(doneStatus(status))
 		})
 	}
 }

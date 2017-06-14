@@ -5,40 +5,37 @@ import Header from '../components/Header';
 import ChartBody from '../components/ChartBody';
 import { todoStatus,doingStatus,doneStatus } from '../store/actions'
 
+/*
 const ChartData = (UserID) => {
-    return dispatch => {	
-		dispatch(todoStatus({
-			doing: true,
-			chartData:[{
-				"pieChartData":
-					[{value:0,name:"On Way"},{value:0,name:'In Transit at Port'},
-					{value:0,name:'Ready for Departure'},
-					{value:0,name:'Packed but no Shipping'},
-					{value:0,name:'Preparation'}],
-				"barChartData":[{
-					"noX":[],
-					"haveX":[]
-				}]
-			}]
-		}))
+    return (dispatch,getState) => {	
+		let state = getState()
+		let status = state.status
+
+		let doing = status.doing
+		if(doing){
+			return;
+		}
 
 		let urlPie = "http://jisapp.jhtgroup.com/AppServer/Home/Main?UserID="+ UserID;
-		let urlBar = "http://jisapp.jhtgroup.com/AppServer/Home/getStatisticsForUserID?UserID="+ UserID;
+    let urlBar = "http://jisapp.jhtgroup.com/AppServer/Home/getStatisticsForUserID?UserID="+ UserID;
 
-		let arr=[{
-						"pieChartData":
-							[{value:0,name:"On Way"},
-							{value:0,name:'In Transit at Port'},
-							{value:0,name:'Ready for Departure'},
-							{value:0,name:'Packed but no Shipping'},
-							{value:0,name:'Preparation'}],
-						"barChartData":[{
-							"noX":[],
-							"haveX":[]
+		status.doing = true
+		status.done = false
+		dispatch(todoStatus(status))
+
+        let arr=[{
+            "pieChartData":
+            [{value:0,name:"On Way"},
+            {value:0,name:'In Transit at Port'},
+			{value:0,name:'Ready for Departure'},
+			{value:0,name:'Packed but no Shipping'},
+			{value:0,name:'Preparation'}],
+            "barChartData":[{
+                "noX":[],
+								"haveX":[]
 						}]
-					}];
-		
-	//获取pie图表数据
+		}];
+		//获取pie图表数据
 	  fetch(urlPie, {
 		  method: 'GET',
 		  headers: {
@@ -72,47 +69,27 @@ const ChartData = (UserID) => {
 					arr[0].barChartData[0].haveX.push(data.NowX);
 					arr[0].barChartData[0].haveX.push(data.NowPlusX);
 					arr[0].barChartData[0].haveX.push(data.NowPlusPlusX);
-					dispatch(doneStatus({
-						doing: false,
-						chartData: arr
-					}))
+                    let chartData = arr
+			        status.chartData = chartData;			
+			        status.doing = false
+			        status.done = true
+			        dispatch(doneStatus(status))	
 					
 			}).catch((ex) => {
-				dispatch(doneStatus({
-				doing: false,
-					chartData:[{
-						"pieChartData":
-							[{value:0,name:"On Way"},{value:0,name:'In Transit at Port'},
-							{value:0,name:'Ready for Departure'},
-							{value:0,name:'Packed but no Shipping'},
-							{value:0,name:'Preparation'}],
-						"barChartData":[{
-							"noX":[],
-							"haveX":[]
-						}]
-					}]
-				}))
+				status.error = "Something mistake :" + ex;
+			    status.doing = false
+			    status.done = true
+			    dispatch(doneStatus(status))
 			})
 		}).catch((ex) => {
-			dispatch(doneStatus({
-				doing: false,
-					chartData:[{
-						"pieChartData":
-							[{value:0,name:"On Way"},{value:0,name:'In Transit at Port'},
-							{value:0,name:'Ready for Departure'},
-							{value:0,name:'Packed but no Shipping'},
-							{value:0,name:'Preparation'}],
-						"barChartData":[{
-							"noX":[],
-							"haveX":[]
-						}]
-					}]
-			}))
+			status.error = "Something mistake :" + ex;
+			status.doing = false
+			status.done = true
+			dispatch(doneStatus(status))
 		})
-
-		
 	}
 }
+*/
 
 const mapStateToProps = (state) => {
   return {
@@ -123,9 +100,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getChartData:(UserID) => {
-    	dispatch(ChartData(UserID))
-    }
+    // getChartData:(UserID) => {
+    // 	dispatch(ChartData(UserID))
+    // }
   }
 }
 

@@ -28,6 +28,10 @@ export default class ListSearchBody extends React.Component {
 
   render() {
   
+    let listSearchData = []
+    if(this.props.status.listSearchData){
+        listSearchData = this.props.status.listSearchData
+    }
     //加载框开始
     const doing = this.props.status.doing;
 		let loadStatus = 'loading';
@@ -64,7 +68,7 @@ export default class ListSearchBody extends React.Component {
           </TableRow>
         </TableHeader>
         <TableBody displayRowCheckbox={false}>
-          {this.props.status.listSearchData.map((item,key) =>    
+          {listSearchData.map((item,key) =>    
             <TableRow key={key} value={item}>              
               <TableRowColumn>{item.SONum}</TableRowColumn>
               <TableRowColumn>{item.ItemsNum}</TableRowColumn>          

@@ -27,13 +27,17 @@ export default class PoPackProgressBody extends React.Component {
 
 
   render() {
-    const poPackProgressdata = this.props.status.poPackProgressdata;
-    const transport = poPackProgressdata.transport.map((item,key)=>{
-        item.Title=item.Title.replace('</br><p style=\"color:blue\">','')
-        item.Title=item.Title.replace('</p>','')
-        return item
-    })
-  
+    
+    let poPackProgressdata= [],transport= [];
+    if(this.props.status.poPackProgressdata){
+        poPackProgressdata = this.props.status.poPackProgressdata;
+        transport = poPackProgressdata.transport.map((item,key)=>{
+            item.Title=item.Title.replace('</br><p style=\"color:blue\">','')
+            item.Title=item.Title.replace('</p>','')
+            return item
+        })
+    }
+    
     //加载框开始
     const doing = this.props.status.doing;
 		let loadStatus = 'loading';

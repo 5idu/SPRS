@@ -19,8 +19,11 @@ export default class DetailForHistorySoItemBody extends React.Component {
 
   render() {
 
-    const listSearchSOItemData = this.props.status.listSearchSOItemData;
-
+    let listSearchSOItemData = {}
+    if(this.props.status.listSearchSOItemData){
+        listSearchSOItemData = this.props.status.listSearchSOItemData;
+    }
+    
     //加载框开始
     const doing = this.props.status.doing;
 		let loadStatus = 'loading';

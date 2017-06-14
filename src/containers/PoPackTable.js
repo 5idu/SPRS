@@ -6,32 +6,39 @@ import PoPackTableBody from '../components/PoPackTableBody';
 import { todoStatus,doingStatus,doneStatus } from '../store/actions'
 
 const poPackTableData = (SONum,ItemsNum,State) => {
-    return dispatch => {	
-		dispatch(todoStatus({
-			doing: true,
-      poPackTabledata: []
-		}))
-		
+    return (dispatch,getState) => {	
+		let state = getState()
+		let status = state.status
+
+		let doing = status.doing
+		if(doing){
+			return;
+		}
+
 		let url = "http://jisapp.jhtgroup.com/AppServer/Home/getStateListForSoItemsState?SONum="+ SONum +"&ItemsNum="+ ItemsNum +"&State="+ State;
-        
+
+		status.doing = true
+		status.done = false
+		dispatch(todoStatus(status))
+
 		return fetch(url, {
 		  method: 'GET',
 		  headers: {
-				'Content-Type': 'application/json'
+			'Content-Type': 'application/json'
 		  }
 		}).then(response => {
 			return response.json()
-		}).then(data => {
-			dispatch(doneStatus({
-				doing: false,
-				poPackTabledata: data 
-			}))
-            
+		}).then(json => {
+            let poPackTabledata = json
+			status.poPackTabledata = poPackTabledata;			
+			status.doing = false
+			status.done = true
+			dispatch(doneStatus(status))		
 		}).catch((ex) => {
-			dispatch(doneStatus({
-				doing: false,
-        poPackTabledata: [] 
-			}))
+			status.error = "Something mistake :" + ex;
+			status.doing = false
+			status.done = true
+			dispatch(doneStatus(status))
 		})
 	}
 }

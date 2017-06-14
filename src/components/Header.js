@@ -95,26 +95,26 @@ class head extends React.Component {
 			        >
 					      <Menu>
 					      	<div style={loginStyle}>
-						        <MenuItem onTouchTap={this.login} primaryText="登录" leftIcon={<SocialPersonOutline />} />					        
+						        <MenuItem onTouchTap={this.login} primaryText="Login" leftIcon={<SocialPersonOutline />} />					        
 						      </div>
 					        <div style={logoutStyle}>
 						        <MenuItem primaryText={user.loginname} leftIcon={<ActionAccountCircle />} />					    
-						        <MenuItem onTouchTap={this.logout} primaryText='退出' leftIcon={<SubdirectoryArrowLeft />} />						        
+						        <MenuItem onTouchTap={this.logout} primaryText='Logout' leftIcon={<SubdirectoryArrowLeft />} />						        
 					        </div>
 
 					        <Divider />
 					        <Link to="/home" onTouchTap={this.handleClose}>
-					        	<MenuItem primaryText="主页" leftIcon={<ActionHome />} />
+					        	<MenuItem primaryText="Home" leftIcon={<ActionHome />} />
 					        </Link>
 					        <Link to="/query" onTouchTap={this.handleClose}>
-					        	<MenuItem primaryText="查询" leftIcon={<ActionSearch />} />
+					        	<MenuItem primaryText="Query" leftIcon={<ActionSearch />} />
 					        </Link>
 					        <Link to="/historys" onTouchTap={this.handleClose}>
-					        	<MenuItem primaryText="历史" leftIcon={<ActionHistory />} />
+					        	<MenuItem primaryText="History" leftIcon={<ActionHistory />} />
 					        </Link>
 					        <Divider />
 					        <Link to="/about" >
-					        	<MenuItem primaryText="关于" leftIcon={<ActionFeedback />} />
+					        	<MenuItem primaryText="About" leftIcon={<ActionFeedback />} />
 					        </Link>
 					      </Menu>
 			        </Drawer>

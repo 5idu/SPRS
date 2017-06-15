@@ -1,4 +1,6 @@
 import React from 'react'
+import {red300, blue500} from 'material-ui/styles/colors';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -47,8 +49,18 @@ export default class QueryByDescriptionBody extends React.Component {
 
         };
 
+        const muiTheme = getMuiTheme({
+            raisedButton:{
+                primaryColor: blue500, 
+                secondaryColor: red300
+            },
+            textField: {
+                focusColor: blue500
+            }
+		});
+
         return (
-            <MuiThemeProvider>
+            <MuiThemeProvider muiTheme={muiTheme}>
                 <div>
                     <TextField
                         hintText="Entry Description"

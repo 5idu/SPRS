@@ -1,4 +1,6 @@
 import React from 'react'
+import {red300, blue500, grey50, grey900} from 'material-ui/styles/colors';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton'
 import TextField from 'material-ui/TextField';
@@ -96,8 +98,21 @@ export default class HistoryBody extends React.Component {
             }
         };
 
+        const muiTheme = getMuiTheme({
+            raisedButton:{
+                primaryColor: blue500, 
+                secondaryColor: red300
+            },
+            textField: {
+                focusColor: blue500
+            },
+            radioButton: {   
+                checkedColor: blue500
+            }
+		});
+
         return (
-            <MuiThemeProvider>
+            <MuiThemeProvider muiTheme={muiTheme}>
                 <div>
                     <div
                         style={{
@@ -125,12 +140,14 @@ export default class HistoryBody extends React.Component {
                         fullWidth={true}
                         ref="textFieldPn"/>
                     <DatePicker
+                        autoOk={true}
                         hintText="Start date"
                         ref="datePickerStartDate"
                         fullWidth={true}
                         value={this.state.startDate}
                         onChange={this._handleStartInput}/>
                     <DatePicker
+                        autoOk={true}
                         hintText="End date"
                         ref="datePickerEndDate"
                         fullWidth={true}

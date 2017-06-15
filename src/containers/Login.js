@@ -38,10 +38,10 @@ const getUser = (UserName,PassWord) => {
 		}).then(data => {
 			if(data.State == '1'){
 				let user = {
-		            loginname: UserName
-		        }
-		        dispatch(saveUser(user))
-		        dispatch(doneStatus({
+					loginname: UserName
+		    }
+		    dispatch(saveUser(user))
+		    dispatch(doneStatus({
 					error: '',
 					doing: false
 				}))

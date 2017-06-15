@@ -1,4 +1,6 @@
 import React from 'react';
+import {green500} from 'material-ui/styles/colors';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
@@ -62,8 +64,14 @@ export default class PoPackProgressBody extends React.Component {
     };
     //加载框结束
 
+    const muiTheme = getMuiTheme({
+        stepper: {
+            iconColor: green500,
+        }
+    });
+
     return (
-    <MuiThemeProvider>
+    <MuiThemeProvider muiTheme={muiTheme}>
       <div> 
       <div style={doing ? style.displayNone:style.displayBlock} >
           <Card>
@@ -110,8 +118,9 @@ export default class PoPackProgressBody extends React.Component {
         <Stepper orientation="vertical">
             {transport.map((item,key) =>
                 <Step key={key}>
-                    <StepLabel active={true} icon={key + 1}>{item.Title}</StepLabel>
-                    <StepContent active={true}>
+                    {/*<StepLabel active={true} icon={key + 1}>{item.Title}</StepLabel>*/}
+                    <StepLabel active={true} icon=''>{item.Title}</StepLabel>
+                    <StepContent active={true} style={{color:'blue'}}>
                         <p>
                             {item.Time}
                         </p>

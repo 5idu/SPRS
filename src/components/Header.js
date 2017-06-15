@@ -2,11 +2,14 @@ import React from 'react';
 import { Link,Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { clearUser } from '../store/actions';
+import {red500} from 'material-ui/styles/colors';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
 import ActionHome from 'material-ui/svg-icons/action/home';
 import ActionAccountCircle from 'material-ui/svg-icons/action/account-circle';
+import ActionSuperAccount from 'material-ui/svg-icons/action/supervisor-account';
 import ActionFeedback from 'material-ui/svg-icons/action/feedback';
 import SubdirectoryArrowLeft from 'material-ui/svg-icons/navigation/subdirectory-arrow-left';
 import IconButton from 'material-ui/IconButton';
@@ -73,18 +76,23 @@ class head extends React.Component {
 			}
 		}
 
+		const muiTheme = getMuiTheme({
+			palette: {
+				primary1Color: red500
+  		}
+		});
 
 		return (
-			<MuiThemeProvider>
+			<MuiThemeProvider muiTheme={muiTheme}>
 				<div>
 					<AppBar
 						iconElementLeft={<IconButton><NavigationMenu/></IconButton>}
 						onLeftIconButtonTouchTap={this.handleToggle}
 						showMenuIconButton={this.state.title=='Login' ? false : true}
 						title={this.state.title}
-						titleStyle={{textAlign: 'center'}}
+						titleStyle={{textAlign: 'center',fontSize:'20px'}}
 						iconElementRight={this.state.title=='Home' ? <IconButton><EditorInsertChart/></IconButton> : <div></div>}
-						style={{position: 'fixed'}}
+						style={{position: 'fixed',width:'100%'}}
 						onRightIconButtonTouchTap={this.showChart}
 					/>
 					<Drawer
@@ -94,15 +102,11 @@ class head extends React.Component {
 			          onRequestChange={this.changeOpen}
 			        >
 					      <Menu>
-					      	<div style={loginStyle}>
-						        <MenuItem onTouchTap={this.login} primaryText="Login" leftIcon={<SocialPersonOutline />} />					        
-						      </div>
-					        <div style={logoutStyle}>
-						        <MenuItem primaryText={user.loginname} leftIcon={<ActionAccountCircle />} />					    
-						        <MenuItem onTouchTap={this.logout} primaryText='Logout' leftIcon={<SubdirectoryArrowLeft />} />						        
+									<div style={logoutStyle}>
+						        <MenuItem primaryText={user.loginname} leftIcon={<ActionAccountCircle />} />	
+										<MenuItem primaryText={'123'} leftIcon={<ActionSuperAccount />} />			    					        
 					        </div>
-
-					        <Divider />
+									<Divider />
 					        <Link to="/home" onTouchTap={this.handleClose}>
 					        	<MenuItem primaryText="Home" leftIcon={<ActionHome />} />
 					        </Link>
@@ -112,10 +116,16 @@ class head extends React.Component {
 					        <Link to="/historys" onTouchTap={this.handleClose}>
 					        	<MenuItem primaryText="History" leftIcon={<ActionHistory />} />
 					        </Link>
-					        <Divider />
 					        <Link to="/about" >
 					        	<MenuItem primaryText="About" leftIcon={<ActionFeedback />} />
 					        </Link>
+									<Divider />
+									<div style={loginStyle}>
+						        <MenuItem onTouchTap={this.login} primaryText="Login" leftIcon={<SocialPersonOutline />} />					        
+						      </div>
+					        <div style={logoutStyle}>			    
+						        <MenuItem onTouchTap={this.logout} primaryText='Logout' leftIcon={<SubdirectoryArrowLeft />} />						        
+					        </div>
 					      </Menu>
 			        </Drawer>
 		        </div>

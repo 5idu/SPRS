@@ -1,9 +1,12 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import {blue500} from 'material-ui/styles/colors';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
+import {Card, CardMedia} from 'material-ui/Card';
 
 export default class LoginForm extends React.Component {
 	constructor(props) {
@@ -91,14 +94,28 @@ export default class LoginForm extends React.Component {
 		  }
 		};
 
+		const muiTheme = getMuiTheme({
+            raisedButton:{
+                primaryColor: blue500
+            },
+            textField: {
+                focusColor: blue500
+            }
+		});
+
 		return (
-		  	<MuiThemeProvider>
+		  	<MuiThemeProvider muiTheme={muiTheme}>
 			  	<div>
+					<Card>
+						<CardMedia>
+							<img src="dist/images/mainLogobg.jpg"/>
+    					</CardMedia>
+  					</Card>
 				  	<TextField
 				      hintText="UserName"
 					  floatingLabelText="UserName"
 				      fullWidth={true}
-				      style={{marginBottom:30}}
+					  style={{marginTop:30}}
 				      onChange={this.handleUserNameChange}
 				    />
                     <TextField
@@ -110,7 +127,7 @@ export default class LoginForm extends React.Component {
 				      errorText={errorText}
 				    />
 				    <div style={doing ? style.displayNone:style.displayBlock} >
-				    	<RaisedButton onTouchTap={this.login} label="Login" primary={true} fullWidth={true}  />
+				    	<RaisedButton onTouchTap={this.login} label="Sign In" primary={true} fullWidth={true}  />
 				    </div>
 			    	<div style={style.container}>
 					    <RefreshIndicator

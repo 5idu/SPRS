@@ -180,14 +180,6 @@ export default class HomeBody extends React.Component {
     return (
       <MuiThemeProvider>
         <div>
-          <div style={style.container}>
-            <RefreshIndicator
-              size={40}
-              left={0}
-              top={20}
-              status={loadStatus}
-              style={style.refresh}/>
-          </div>
           <div
             style={doing
             ? style.displayNone
@@ -233,6 +225,14 @@ export default class HomeBody extends React.Component {
                 onClick={() => this.getStateTable('preparation')}
                 rightIcon={icon.preparation}/>
             </List>
+          </div>
+          <div style={style.container}>
+            <RefreshIndicator
+              size={40}
+              left={0}
+              top={20}
+              status={loadStatus}
+              style={style.refresh}/>
           </div>
         </div>
       </MuiThemeProvider>

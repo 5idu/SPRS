@@ -4,7 +4,8 @@ const WebpackBundleSizeAnalyzerPlugin = require('webpack-bundle-size-analyzer').
 module.exports = {
   devtool: 'source-map',
   entry: {
-    'app':'./src/index'
+    'app':'./src/index',
+    'mainLogobg':'./src/static/images/mainLogobg.jpg'
   },
   output: {
     path: path.resolve(__dirname, './dist'),
@@ -21,12 +22,14 @@ module.exports = {
       {
         test: /\.(woff2?|eot|ttf|otf|svg)(\?.*)?$/,
         loader: 'url-loader'
+      },
+      {
+        test: /\.(png|jpg)$/,
+        loader: 'url-loader?limit=8192&name=images/[name].[ext]'
       }
     ]
   },
   plugins: [
-
-
     new webpack.LoaderOptionsPlugin({
         minimize: true,
         debug: false
@@ -46,8 +49,5 @@ module.exports = {
     }),
 
     new WebpackBundleSizeAnalyzerPlugin('./plain-report.txt')
-
-
-
   ],
 }

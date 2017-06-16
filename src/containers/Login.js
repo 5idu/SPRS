@@ -90,6 +90,37 @@ const orderData = (UserID) => {
 	}
 }
 
+const userInfo = (UserID) => {
+	return (dispatch,getState) => {	
+		let state = getState()
+		let status = state.status
+		let user = state.user
+		
+	  let url = "http://jisapp.jhtgroup.com/AppServer/Home/getUserInfo?UserID="+ UserID;
+
+		return fetch(url, {
+		   method: 'GET',
+		   headers: {
+				'Content-Type': 'application/json;charset=utf-8'
+		   }
+		}).then(response => {
+			return response.json()
+		}).then(json => {
+			user.usrName = json.usrName
+			status.doing = false
+			status.done = true
+			dispatch(saveUser(user))
+			dispatch(doneStatus(status))
+			
+		}).catch((ex) => {
+			status.error = "Something mistake :" + ex;
+			status.doing = false
+			status.done = true
+			dispatch(doneStatus(status))
+		})
+	}
+}
+
 const mapStateToProps = (state) => {
   return {
     user: state.user,
@@ -104,6 +135,9 @@ const mapDispatchToProps = (dispatch) => {
     },
 		getOrderData:(UserID) => {
     	dispatch(orderData(UserID))
+    },
+		getUserInfo:(UserID) => {
+    	dispatch(userInfo(UserID))
     }
   }
 }

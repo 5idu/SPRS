@@ -68,6 +68,15 @@ export default class LoginForm extends React.Component {
 		return true
 	}
 
+	componentWillUnmount() {
+		let user = this.props.user; 
+		if(user.loginname){
+			this.props.getUserInfo(user.loginname)
+		}else{
+			this.props.getUserInfo(this.state.UserName);
+		}
+	}
+
 	render(){
 		const errorText = this.props.status.error;
 		const doing = this.props.status.doing;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link,Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { clearUser } from '../store/actions';
+import { clearUser, clearStatus } from '../store/actions';
 import {red500} from 'material-ui/styles/colors';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -50,6 +50,7 @@ class head extends React.Component {
 	logout = () => {
 		this.handleClose();
 		this.props.clearUser();
+		this.props.clearStatus();
 		let uri = this.props.location.pathname;
 		this.props.history.push('/login',{fromUri:uri});
 	}
@@ -92,7 +93,7 @@ class head extends React.Component {
 						title={this.state.title}
 						titleStyle={{textAlign: 'center',fontSize:'20px'}}
 						iconElementRight={this.state.title=='Home' ? <IconButton><EditorInsertChart/></IconButton> : <div></div>}
-						style={{position: 'fixed',width:'100%'}}
+						style={{position: 'fixed'}}
 						onRightIconButtonTouchTap={this.showChart}
 					/>
 					<Drawer
@@ -104,7 +105,8 @@ class head extends React.Component {
 					      <Menu>
 									<div style={logoutStyle}>
 						        <MenuItem primaryText={user.loginname} leftIcon={<ActionAccountCircle />} />	
-										<MenuItem primaryText={'123'} leftIcon={<ActionSuperAccount />} />			    					        
+										<MenuItem primaryText={user.usrName} leftIcon={<ActionSuperAccount />} />		
+										{/*<MenuItem primaryText={'jis'} leftIcon={<ActionSuperAccount />} />		    					        */}
 					        </div>
 									<Divider />
 					        <Link to="/home" onTouchTap={this.handleClose}>
@@ -145,6 +147,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     clearUser: () => {
       dispatch(clearUser())
+    },
+		clearStatus: () => {
+      dispatch(clearStatus())
     }
   }
 }

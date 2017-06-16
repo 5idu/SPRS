@@ -16,6 +16,7 @@ export function clearUser(){
 export const TODO_STATUS = 'TODO_STATUS'
 export const DOING_STATUS = 'DOING_STATUS'
 export const DONE_STATUS = 'DONE_STATUS'
+export const CLEAR_STATUS = 'CLEAR_STATUS'
 
 export function todoStatus(status){
   return {
@@ -35,6 +36,12 @@ export function doneStatus(status){
   return {
     type: DONE_STATUS,
     status
+  }
+}
+
+export function clearStatus(status){
+  return {
+    type: CLEAR_STATUS
   }
 }
 

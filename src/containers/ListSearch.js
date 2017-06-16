@@ -29,7 +29,7 @@ const listSearch = (UserID,Type,BeginTime,OverTime,LiaoNum) => {
 		}).then(response => {
 			return response.json()
 		}).then(json => {
-            let listSearchData = json
+      let listSearchData = json
 			status.listSearchData = listSearchData;			
 			status.doing = false
 			status.done = true

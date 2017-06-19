@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch) => {
     return {}
 }
 
-const MainBody = connect(
+const QueryByPnForm = connect(
   mapStateToProps,
   mapDispatchToProps
 )(QueryByPnBody);
@@ -28,7 +28,7 @@ export default class QueryByPn extends React.Component {
 		  <div>
 		  	<Header {...this.props}/>
 		  	<div className="main">
-		  		<MainBody {...this.props}/>
+		  		<QueryByPnForm {...this.props}/>
 		  	</div>
 		  </div>
 		)	

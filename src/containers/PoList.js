@@ -58,7 +58,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const MainBody = connect(
+const PoListForm = connect(
   mapStateToProps,
   mapDispatchToProps
 )(PoListBody);
@@ -69,7 +69,7 @@ export default class PoList extends React.Component {
 		  <div>
 		  	<Header {...this.props}/>
 		  	<div className="main">
-		  		<MainBody {...this.props}/>
+		  		<PoListForm {...this.props}/>
 		  	</div>
 		  </div>
 		)	

@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch) => {
     return {}
 }
 
-const MainBody = connect(
+const QueryByDescriptionForm = connect(
   mapStateToProps,
   mapDispatchToProps
 )(QueryByDescriptionBody);
@@ -28,7 +28,7 @@ export default class QueryByDescription extends React.Component {
 		  <div>
 		  	<Header {...this.props}/>
 		  	<div className="main">
-		  		<MainBody {...this.props}/>
+		  		<QueryByDescriptionForm {...this.props}/>
 		  	</div>
 		  </div>
 		)	

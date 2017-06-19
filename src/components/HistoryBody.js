@@ -54,7 +54,6 @@ export default class HistoryBody extends React.Component {
             return
         }
 
-        let userID = this.props.user.loginname
         let beginTime = this.refs.datePickerStartDate.refs.input.props.value
         let overTime = this.refs.datePickerEndDate.refs.input.props.value
         let LiaoNum = this.refs.textFieldPn.input.value
@@ -64,7 +63,6 @@ export default class HistoryBody extends React.Component {
             this.props.history.push(`/historys/listSearch/${type}/${beginTime}/${overTime}/${LiaoNum}`);
         }else {
             type = '2'
-            this.props.getTrendChartData(userID, type, beginTime, overTime, LiaoNum);
             this.props.history.push(`/historys/trendChart/${type}/${beginTime}/${overTime}/${LiaoNum}`);
         }    
     }

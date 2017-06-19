@@ -58,7 +58,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const MainBody = connect(
+const DetailForHistorySoItemForm = connect(
   mapStateToProps,
   mapDispatchToProps
 )(DetailForHistorySoItemBody);
@@ -69,7 +69,7 @@ export default class DetailForHistorySoItem extends React.Component {
 		  <div>
 		  	<Header {...this.props}/>
 		  	<div className="main">
-		  		<MainBody {...this.props}/>
+		  		<DetailForHistorySoItemForm {...this.props}/>
 		  	</div>
 		  </div>
 		)	

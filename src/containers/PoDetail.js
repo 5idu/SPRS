@@ -58,7 +58,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const MainBody = connect(
+const PoDetailForm = connect(
   mapStateToProps,
   mapDispatchToProps
 )(PoDetailBody);
@@ -69,7 +69,7 @@ export default class PoDetail extends React.Component {
 		  <div>
 		  	<Header {...this.props}/>
 		  	<div className="main">
-		  		<MainBody {...this.props}/>
+		  		<PoDetailForm {...this.props}/>
 		  	</div>
 		  </div>
 		)	

@@ -58,7 +58,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const MainBody = connect(
+const ListSearchForm = connect(
   mapStateToProps,
   mapDispatchToProps
 )(ListSearchBody);
@@ -69,7 +69,7 @@ export default class ListSearch extends React.Component {
 		  <div>
 		  	<Header {...this.props}/>
 		  	<div className="main">
-		  		<MainBody {...this.props}/>
+		  		<ListSearchForm {...this.props}/>
 		  	</div>
 		  </div>
 		)	

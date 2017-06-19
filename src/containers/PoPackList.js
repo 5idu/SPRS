@@ -58,7 +58,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const MainBody = connect(
+const PoPackListForm = connect(
   mapStateToProps,
   mapDispatchToProps
 )(PoPackListBody);
@@ -69,7 +69,7 @@ export default class PoPackList extends React.Component {
 		  <div>
 		  	<Header {...this.props}/>
 		  	<div className="main">
-		  		<MainBody {...this.props}/>
+		  		<PoPackListForm {...this.props}/>
 		  	</div>
 		  </div>
 		)	

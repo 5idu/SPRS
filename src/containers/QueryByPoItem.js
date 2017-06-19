@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch) => {
     return {}
 }
 
-const MainBody = connect(
+const QueryByPoItemForm = connect(
   mapStateToProps,
   mapDispatchToProps
 )(QueryByPoItemBody);
@@ -28,7 +28,7 @@ export default class QueryByPoItem extends React.Component {
 		  <div>
 		  	<Header {...this.props}/>
 		  	<div className="main">
-		  		<MainBody {...this.props}/>
+		  		<QueryByPoItemForm {...this.props}/>
 		  	</div>
 		  </div>
 		)	

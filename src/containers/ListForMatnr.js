@@ -58,7 +58,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const MainBody = connect(
+const ListForMatnrForm = connect(
   mapStateToProps,
   mapDispatchToProps
 )(ListForMatnrBody);
@@ -69,7 +69,7 @@ export default class ListForMatnr extends React.Component {
 		  <div>
 		  	<Header {...this.props}/>
 		  	<div className="main">
-		  		<MainBody {...this.props}/>
+		  		<ListForMatnrForm {...this.props}/>
 		  	</div>
 		  </div>
 		)	

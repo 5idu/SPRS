@@ -92,7 +92,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const MainBody = connect(
+const HomeForm = connect(
   mapStateToProps,
   mapDispatchToProps
 )(HomeBody);
@@ -103,7 +103,7 @@ export default class Home extends React.Component {
 		  <div>
 		  	<Header {...this.props}/>
 		  	<div className="main">
-		  		<MainBody {...this.props}/>
+		  		<HomeForm {...this.props}/>
 		  	</div>
 		  </div>
 		)	

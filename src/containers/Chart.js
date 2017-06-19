@@ -106,7 +106,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const MainBody = connect(
+const ChartForm = connect(
   mapStateToProps,
   mapDispatchToProps
 )(ChartBody);
@@ -117,7 +117,7 @@ export default class Chart extends React.Component {
 		  <div>
 		  	<Header {...this.props}/>
 		  	<div className="main">
-		  		<MainBody {...this.props}/>
+		  		<ChartForm {...this.props}/>
 		  	</div>
 		  </div>
 		)	

@@ -3,6 +3,7 @@ import {Link, Redirect} from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 import FlatButton from 'material-ui/FlatButton';
+import 'whatwg-fetch';
 
 //导入echarts
 var echarts = require('echarts/lib/echarts') //必须
@@ -16,15 +17,28 @@ var echarts = require('echarts/lib/echarts') //必须
 export default class TrendChartBody extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            PCS: 0,
+            Amount: 0
+        }
     }
 
-    initLine() {
-        
-        let lineChartData = {"order":[{"Time":"201607","Num":9}]}
+    // initLine() {
+    //     let lineChartData = []
 
-        if(this.props.status.trendChartData){
-            lineChartData = this.props.status.trendChartData.order //外部传入的data数据
-        }
+    //     if(this.props.status.trendChartData){
+    //         lineChartData = this.props.status.trendChartData.order //外部传入的data数据
+    //     }
+        
+    //     let myChart = echarts.init(this.refs.lineChart) //初始化echarts
+
+    //     //我们要定义一个setPieOption函数将data传入option里面
+    //     let options = this.setLineOption(lineChartData)
+    //     //设置options
+    //     myChart.setOption(options)
+    // }
+
+    initLineTemp(lineChartData) {
         
         let myChart = echarts.init(this.refs.lineChart) //初始化echarts
 
@@ -50,16 +64,45 @@ export default class TrendChartBody extends React.Component {
         return arr;
     }
 
-    componentDidMount() {
-        this.initLine()
-    }
+    // componentWillMount() {
+    //     let userID = this.props.user.loginname
+    //     let type = this.props.location.pathname.split('/')[3]
+    //     let beginTime = this.props.location.pathname.split('/')[4]
+    //     let overTime = this.props.location.pathname.split('/')[5]
+    //     let LiaoNum = this.props.location.pathname.split('/')[6]
+    //     this.props.getTrendChartData(userID, type, beginTime, overTime, LiaoNum);
+    // }
 
+    componentDidMount() {
+        let userID = this.props.user.loginname
+        let type = this.props.location.pathname.split('/')[3]
+        let beginTime = this.props.location.pathname.split('/')[4]
+        let overTime = this.props.location.pathname.split('/')[5]
+        let LiaoNum = this.props.location.pathname.split('/')[6]
+        let url = "http://jisapp.jhtgroup.com/AppServer/Home/HistorySearch?UserID="+ userID +"&Type="+ type +"&BeginTime="+ beginTime +"&OverTime="+ overTime +"&LiaoNum="+ LiaoNum;
+
+        fetch(url, {
+		  method: 'GET',
+		  headers: {
+				'Content-Type': 'application/json'
+		  }
+		}).then(response => {
+			return response.json()
+		}).then(json => {
+			this.initLineTemp(json.order)
+            this.setState({
+                PCS: json.PCS,
+                Amount: json.Amount
+            })
+		})
+    }
+    
     //一个基本的echarts图表配置函数
     setLineOption(lineChartData) {
         return {
             title: {
                 text: 'HISTORY DELIVERY DATA',
-                subtext: 'PN#：' + this
+                subtext: 'PN#:' + this
                     .props
                     .location
                     .pathname
@@ -115,7 +158,7 @@ export default class TrendChartBody extends React.Component {
     }
 
     render() {
-
+        
         //加载框开始
         const doing = this.props.status.doing;
         let loadStatus = 'loading';
@@ -190,11 +233,11 @@ export default class TrendChartBody extends React.Component {
                                 secondary={true}/><br/>
                             Shipout Qty (PCS):
                             <FlatButton
-                                label={this.props.status.trendChartData?this.props.status.trendChartData.PCS:0}
+                                label={this.state.PCS}
                                 secondary={true}/><br/>
                             Shipout Amount ($US):
                             <FlatButton
-                                label={this.props.status.trendChartData?this.props.status.trendChartData.Amount:0}
+                                label={this.state.Amount}
                                 secondary={true}/>
                         </div>
                     </div>

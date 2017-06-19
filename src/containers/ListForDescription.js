@@ -58,7 +58,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const MainBody = connect(
+const ListForDescriptionForm = connect(
   mapStateToProps,
   mapDispatchToProps
 )(ListForDescriptionBody);
@@ -69,7 +69,7 @@ export default class ListForDescription extends React.Component {
 		  <div>
 		  	<Header {...this.props}/>
 		  	<div className="main">
-		  		<MainBody {...this.props}/>
+		  		<ListForDescriptionForm {...this.props}/>
 		  	</div>
 		  </div>
 		)	

@@ -8,7 +8,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 import {Card, CardMedia} from 'material-ui/Card';
 
-export default class LoginForm extends React.Component {
+export default class LoginBody extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import 'whatwg-fetch';
 import Header from '../components/Header';
-import LoginForm from '../components/LoginForm';
+import LoginBody from '../components/LoginBody';
 import { saveUser,todoStatus,doingStatus,doneStatus } from '../store/actions';
 
 const getUser = (UserName,PassWord) => {
@@ -142,10 +142,10 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const UserLogin = connect(
+const LoginForm = connect(
   mapStateToProps,
   mapDispatchToProps
-)(LoginForm)
+)(LoginBody)
 
 
 export default class Login extends React.Component {
@@ -154,7 +154,7 @@ export default class Login extends React.Component {
 		  <div>
 		  	<Header {...this.props}/>
 		  	<div className="main">
-		  		<UserLogin {...this.props}/>
+		  		<LoginForm {...this.props}/>
 		  	</div>
 		  </div>
 		)

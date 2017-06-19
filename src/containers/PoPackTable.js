@@ -58,7 +58,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const MainBody = connect(
+const PoPackTableForm = connect(
   mapStateToProps,
   mapDispatchToProps
 )(PoPackTableBody);
@@ -69,7 +69,7 @@ export default class PoPackTable extends React.Component {
 		  <div>
 		  	<Header {...this.props}/>
 		  	<div className="main">
-		  		<MainBody {...this.props}/>
+		  		<PoPackTableForm {...this.props}/>
 		  	</div>
 		  </div>
 		)	

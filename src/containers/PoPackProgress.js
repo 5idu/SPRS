@@ -58,7 +58,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const MainBody = connect(
+const PoPackProgressForm = connect(
   mapStateToProps,
   mapDispatchToProps
 )(PoPackProgressBody);
@@ -69,7 +69,7 @@ export default class PoPackProgress extends React.Component {
 		  <div>
 		  	<Header {...this.props}/>
 		  	<div className="main">
-		  		<MainBody {...this.props}/>
+		  		<PoPackProgressForm {...this.props}/>
 		  	</div>
 		  </div>
 		)	

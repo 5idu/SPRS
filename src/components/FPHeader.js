@@ -7,8 +7,8 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
-import ActionBookmark from 'material-ui/svg-icons/action/bookmark';
 import ActionHome from 'material-ui/svg-icons/action/home';
+import ActionBookmark from 'material-ui/svg-icons/action/bookmark';
 import ActionAccountCircle from 'material-ui/svg-icons/action/account-circle';
 import ActionSuperAccount from 'material-ui/svg-icons/action/supervisor-account';
 import ActionFeedback from 'material-ui/svg-icons/action/feedback';
@@ -56,10 +56,6 @@ class head extends React.Component {
 		this.props.history.push('/login',{fromUri:uri});
 	}
 
-	showChart=()=> {
-		 this.props.history.push('/chart');
-	}
-
 	render(){
 
 		const user = this.props.user
@@ -81,7 +77,7 @@ class head extends React.Component {
 		const muiTheme = getMuiTheme({
 			palette: {
 				primary1Color: red500
-  		}
+  		    }
 		});
 
 		return (
@@ -93,9 +89,7 @@ class head extends React.Component {
 						showMenuIconButton={this.state.title=='Login' ? false : true}
 						title={this.state.title}
 						titleStyle={{textAlign: 'center',fontSize:'20px'}}
-						iconElementRight={this.state.title=='Home' ? <IconButton><EditorInsertChart/></IconButton> : <div></div>}
-						style={{position: 'fixed',height:'50px'}}
-						onRightIconButtonTouchTap={this.showChart}
+						style={{height:'50px'}}
 					/>
 					<Drawer
 			          docked={false}
@@ -104,28 +98,28 @@ class head extends React.Component {
 			          onRequestChange={this.changeOpen}
 			        >
 					      <Menu>
-									<MenuItem primaryText={'Service Parts'} leftIcon={<ActionBookmark />} />
-                  <Divider />
-									<div style={logoutStyle}>
+                            <MenuItem primaryText={'Products'} leftIcon={<ActionBookmark />} />
+                            <Divider />
+							<div style={logoutStyle}>
 						        <MenuItem primaryText={user.loginname} leftIcon={<ActionAccountCircle />} />	
-										<MenuItem primaryText={user.usrName} leftIcon={<ActionSuperAccount />} />		
-										{/*<MenuItem primaryText={'jis'} leftIcon={<ActionSuperAccount />} />		    					        */}
+								<MenuItem primaryText={user.usrName} leftIcon={<ActionSuperAccount />} />		
+								{/*<MenuItem primaryText={'jis'} leftIcon={<ActionSuperAccount />} />		    					        */}
 					        </div>
-									<Divider />
-					        <Link to="/home" onTouchTap={this.handleClose}>
+							<Divider />
+					        <Link to="/fphome" onTouchTap={this.handleClose}>
 					        	<MenuItem primaryText="Home" leftIcon={<ActionHome />} />
 					        </Link>
-					        <Link to="/query" onTouchTap={this.handleClose}>
+					        <Link to="/fpquery" onTouchTap={this.handleClose}>
 					        	<MenuItem primaryText="Query" leftIcon={<ActionSearch />} />
 					        </Link>
-					        <Link to="/historys" onTouchTap={this.handleClose}>
+					        <Link to="/fphistorys" onTouchTap={this.handleClose}>
 					        	<MenuItem primaryText="History" leftIcon={<ActionHistory />} />
 					        </Link>
-					        <Link to="/about" >
+					        <Link to="/fpabout" >
 					        	<MenuItem primaryText="About" leftIcon={<ActionFeedback />} />
 					        </Link>
-									<Divider />
-									<div style={loginStyle}>
+							<Divider />
+							<div style={loginStyle}>
 						        <MenuItem onTouchTap={this.login} primaryText="Login" leftIcon={<SocialPersonOutline />} />					        
 						      </div>
 					        <div style={logoutStyle}>			    
@@ -157,10 +151,10 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const Header = connect(
+const FPHeader = connect(
   mapStateToProps,
   mapDispatchToProps
 )(head)
 
-export default Header;
+export default FPHeader;
 

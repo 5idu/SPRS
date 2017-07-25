@@ -7,13 +7,15 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 import {Card, CardMedia} from 'material-ui/Card';
+import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton'
 
 export default class LoginBody extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
             UserName:'',
-            PassWord:''
+            PassWord:'',
+			radioCheck: "radioSP",
 		};
 	}
 
@@ -38,17 +40,30 @@ export default class LoginBody extends React.Component {
 	goTo = () => {
 		let user = this.props.user;
 		if(user && Object.keys(user).length > 0){
-
-			//获取数据，传递给子组件,这样子组件就是无状态的
-			if(user.loginname){
-				this.props.getOrderData(user.loginname);
+			if(this.state.radioCheck==='radioSP'){
+				//获取数据，传递给子组件,这样子组件就是无状态的
+				if(user.loginname){
+					this.props.getOrderData(user.loginname,'SP');
+				}else{
+					this.props.getOrderData(this.state.UserName,'SP');
+				}
+				this.props.history.push('/home');
 			}else{
-				this.props.getOrderData(this.state.UserName);
+				if(user.loginname){
+					this.props.getOrderData(user.loginname,'FP');
+				}else{
+					this.props.getOrderData(this.state.UserName,'FP');
+				}
+				this.props.history.push('/fphome');
 			}
-			this.props.history.push('/home');
+			
 		}
 	}
-	
+
+	 _handleRadioInput = (event, value) => {
+        this.setState({radioCheck: value});
+    }
+
 	componentWillMount(){
 		this.goTo()
 	}
@@ -56,14 +71,22 @@ export default class LoginBody extends React.Component {
 	shouldComponentUpdate(nextProps){
 		let user = nextProps.user; 
     	if(user && Object.keys(user).length > 0){
-			
-			//获取数据，传递给子组件,这样子组件就是无状态的
-			if(user.loginname){
-				this.props.getOrderData(user.loginname);
+			if(this.state.radioCheck==='radioSP'){
+				//获取数据，传递给子组件,这样子组件就是无状态的
+				if(user.loginname){
+					this.props.getOrderData(user.loginname,'SP');
+				}else{
+					this.props.getOrderData(this.state.UserName,'SP');
+				}
+				this.props.history.push('/home')
 			}else{
-				this.props.getOrderData(this.state.UserName);
+				if(user.loginname){
+					this.props.getOrderData(user.loginname,'FP');
+				}else{
+					this.props.getOrderData(this.state.UserName,'FP');
+				}
+				this.props.history.push('/fphome');
 			}
-			this.props.history.push('/home')
     	}
 		return true
 	}
@@ -87,20 +110,24 @@ export default class LoginBody extends React.Component {
 		}
 		
 		const style = {
-		  container: {
-		    position: 'relative',
-		    textAlign: 'center'
-		  },
-		  refresh: {
-		    display: 'inline-block',
-		    position: 'relative',
-		  },
-		  displayNone: {
-		  	display: 'none'
-		  },
-		  displayBlock: {
-		  	display: 'block'
-		  }
+			container: {
+				position: 'relative',
+		    	textAlign: 'center'
+		  	},
+		  	refresh: {
+		    	display: 'inline-block',
+		    	position: 'relative',
+		  	},
+		  	displayNone: {
+		  		display: 'none'
+		  	},
+		  	displayBlock: {
+		  		display: 'block',
+			 	marginTop: 50
+		  	},
+		  	radioButton: {
+                margin: 12
+			}
 		};
 
 		const muiTheme = getMuiTheme({
@@ -109,6 +136,9 @@ export default class LoginBody extends React.Component {
             },
             textField: {
                 focusColor: blue500
+            },
+			radioButton: {   
+                checkedColor: blue500
             }
 		});
 
@@ -135,6 +165,24 @@ export default class LoginBody extends React.Component {
 				      onChange={this.handlePassWordChange}
 				      errorText={errorText}
 				    />
+					<div>
+                        <RadioButtonGroup
+                            name="radioGroup"
+                            valueSelected={this.state.radioCheck}
+                            ref="radioGroup"
+                            onChange={this._handleRadioInput}
+							style={{display:'inline-block'}}>
+                            <RadioButton 
+                                value="radioSP" 
+                                label="Service Parts" 
+                                style={style.radioButton}/>
+                            <RadioButton
+                                value="radioFP"
+                                label="Products"
+                                style={style.radioButton}/>
+                        </RadioButtonGroup>
+                    </div>	
+
 				    <div style={doing ? style.displayNone:style.displayBlock} >
 				    	<RaisedButton onTouchTap={this.login} label="Sign In" primary={true} fullWidth={true}  />
 				    </div>

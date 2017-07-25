@@ -21,6 +21,22 @@ import ListSearch from './ListSearch';
 import DetailForHistorySoItem from './DetailForHistorySoItem';
 import TrendChart from './TrendChart'
 
+import FPHome from './FPHome';
+import FPPoList from './FPPoList';
+import FPPoDetail from './FPPoDetail';
+import FPPoPackProgress from './FPPoPackProgress';
+import FPQuery from './FPQuery';
+import FPQueryByPo from './FPQueryByPo';
+import FPQueryByPoItem from './FPQueryByPoItem';
+import FPQueryByPn from './FPQueryByPn';
+import FPListForMatnr from './FPListForMatnr';
+import FPQueryByDescription from './FPQueryByDescription';
+import FPListForDescription from './FPListForDescription';
+import FPAbout from './FPAbout';
+import FPHistorys from './FPHistorys';
+import FPHisPoDetail from './FPHisPoDetail';
+import FPHisPoPackProgress from './FPHisPoPackProgress';
+
 const routes = [
     {
         path: '/',
@@ -165,6 +181,80 @@ const routes = [
         path: '/login',
         component: Login,
         name: 'Login'
+    },{
+        path: '/fphome',
+        component: FPHome,
+        exact: true,
+        name: 'Home'
+    },{
+        path: '/fphome/:state',
+        component: FPPoList,
+        exact: true,
+        name: 'PoList'
+    },{
+        path: '/fphome/:state/:soNum',
+        component: FPPoDetail,
+        exact: true,
+        name: 'PoDetail'
+    },{
+        path: '/fphome/:state/:soNum/:itemsNum',
+        component: FPPoPackProgress,
+        exact: true,
+        name: 'PoPackProgress'
+    },{
+        path: '/fpquery',
+        component: FPQuery,
+        exact: true,
+        name: 'Query'
+    },{
+        path: '/fpquery/po',
+        component: FPQueryByPo,
+        exact: true,
+        name: 'Query by PO number'
+    },{
+        path: '/fpquery/po&item',
+        component: FPQueryByPoItem,
+        exact: true,
+        name: 'Query by PO+Item number'
+    },{
+        path: '/fpquery/pn',
+        component: FPQueryByPn,
+        exact: true,
+        name: 'Query by PN#'
+    },{
+        path: '/fpquery/matnr/:pn',
+        component: FPListForMatnr,
+        exact: true,
+        name: 'PO Content'
+    },{
+        path: '/fpquery/description',
+        component: FPQueryByDescription,
+        exact: true,
+        name: 'Query by Description'
+    },{
+        path: '/fpquery/desc/:desc',
+        component: FPListForDescription,
+        exact: true,
+        name: 'Progress'
+    },{
+        path: '/fpabout',
+        component: FPAbout,
+        name: 'About'
+    },{
+        path: '/fphistorys',
+        component: FPHistorys,
+        exact: true,
+        name: 'History'
+    },{
+        path: '/fphistorys/:state/:soNum',
+        component: FPHisPoDetail,
+        exact: true,
+        name: 'PoDetail'
+    },{
+        path: '/fphistorys/:state/:soNum/:itemsNum',
+        component: FPHisPoPackProgress,
+        exact: true,
+        name: 'PoPackProgress'
     }
 ]
 
